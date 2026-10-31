@@ -1,6 +1,7 @@
 [
  {
   "chamber": "senate",
+  "sb_control_d": 77.885,
   "total": 100,
   "majority": 51,
   "note": "Vance breaks a 50-50 tie",
@@ -20,10 +21,12 @@
  },
  {
   "chamber": "house",
+  "sb_control_d": 95.695,
+  "sb_mean_d": 268.8,
   "total": 435,
   "majority": 218,
-  "untracked_d": 204,
-  "untracked_r": 178,
+  "untracked_d": 186,
+  "untracked_r": 164,
   "not_up_d": 0,
   "not_up_r": 0
  }

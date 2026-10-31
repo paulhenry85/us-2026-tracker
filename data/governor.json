@@ -29,7 +29,9 @@
   "status": "Pre-election",
   "winner": null,
   "called_by": null,
-  "as_of": null
+  "as_of": null,
+  "rep_label": "3 Republicans",
+  "sb_d": 96.5
  },
  {
   "key": "AZ",
@@ -61,7 +63,8 @@
   "status": "Pre-election",
   "winner": null,
   "called_by": null,
-  "as_of": null
+  "as_of": null,
+  "sb_d": 95.3
  },
  {
   "key": "FL",
@@ -93,7 +96,8 @@
   "status": "Pre-election",
   "winner": null,
   "called_by": null,
-  "as_of": null
+  "as_of": null,
+  "sb_d": 22.6
  },
  {
   "key": "GA",
@@ -125,7 +129,8 @@
   "status": "Pre-election",
   "winner": null,
   "called_by": null,
-  "as_of": null
+  "as_of": null,
+  "sb_d": 63.0
  },
  {
   "key": "IA",
@@ -157,7 +162,8 @@
   "status": "Pre-election",
   "winner": null,
   "called_by": null,
-  "as_of": null
+  "as_of": null,
+  "sb_d": 92.5
  },
  {
   "key": "KS",
@@ -189,7 +195,8 @@
   "status": "Pre-election",
   "winner": null,
   "called_by": null,
-  "as_of": null
+  "as_of": null,
+  "sb_d": 33.3
  },
  {
   "key": "MI",
@@ -221,7 +228,8 @@
   "status": "Pre-election",
   "winner": null,
   "called_by": null,
-  "as_of": null
+  "as_of": null,
+  "sb_d": 95.2
  },
  {
   "key": "NE",
@@ -253,7 +261,8 @@
   "status": "Pre-election",
   "winner": null,
   "called_by": null,
-  "as_of": null
+  "as_of": null,
+  "sb_d": 12.3
  },
  {
   "key": "NV",
@@ -285,7 +294,8 @@
   "status": "Pre-election",
   "winner": null,
   "called_by": null,
-  "as_of": null
+  "as_of": null,
+  "sb_d": 49.3
  },
  {
   "key": "NH",
@@ -317,7 +327,8 @@
   "status": "Pre-election",
   "winner": null,
   "called_by": null,
-  "as_of": null
+  "as_of": null,
+  "sb_d": 5.2
  },
  {
   "key": "OH",
@@ -349,7 +360,8 @@
   "status": "Pre-election",
   "winner": null,
   "called_by": null,
-  "as_of": null
+  "as_of": null,
+  "sb_d": 78.9
  },
  {
   "key": "OK",
@@ -381,7 +393,8 @@
   "status": "Pre-election",
   "winner": null,
   "called_by": null,
-  "as_of": null
+  "as_of": null,
+  "sb_d": 7.0
  },
  {
   "key": "OR",
@@ -413,7 +426,8 @@
   "status": "Pre-election",
   "winner": null,
   "called_by": null,
-  "as_of": null
+  "as_of": null,
+  "sb_d": 84.3
  },
  {
   "key": "TX",
@@ -445,7 +459,8 @@
   "status": "Pre-election",
   "winner": null,
   "called_by": null,
-  "as_of": null
+  "as_of": null,
+  "sb_d": 28.7
  },
  {
   "key": "VT",
@@ -477,7 +492,8 @@
   "status": "Pre-election",
   "winner": null,
   "called_by": null,
-  "as_of": null
+  "as_of": null,
+  "sb_d": 27.7
  },
  {
   "key": "WI",
@@ -509,6 +525,7 @@
   "status": "Pre-election",
   "winner": null,
   "called_by": null,
-  "as_of": null
+  "as_of": null,
+  "sb_d": 81.1
  }
 ]

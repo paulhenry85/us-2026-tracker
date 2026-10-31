@@ -29,7 +29,8 @@
   "status": "Pre-election",
   "winner": null,
   "called_by": null,
-  "as_of": null
+  "as_of": null,
+  "sb_d": 56.2
  },
  {
   "key": "FL-S",
@@ -61,7 +62,8 @@
   "status": "Pre-election",
   "winner": null,
   "called_by": null,
-  "as_of": null
+  "as_of": null,
+  "sb_d": 17.2
  },
  {
   "key": "GA",
@@ -93,7 +95,8 @@
   "status": "Pre-election",
   "winner": null,
   "called_by": null,
-  "as_of": null
+  "as_of": null,
+  "sb_d": 98.0
  },
  {
   "key": "IA",
@@ -125,7 +128,8 @@
   "status": "Pre-election",
   "winner": null,
   "called_by": null,
-  "as_of": null
+  "as_of": null,
+  "sb_d": 58.6
  },
  {
   "key": "KS",
@@ -157,7 +161,8 @@
   "status": "Pre-election",
   "winner": null,
   "called_by": null,
-  "as_of": null
+  "as_of": null,
+  "sb_d": 61.2
  },
  {
   "key": "LA",
@@ -189,7 +194,8 @@
   "status": "Pre-election",
   "winner": null,
   "called_by": null,
-  "as_of": null
+  "as_of": null,
+  "sb_d": 7.6
  },
  {
   "key": "ME",
@@ -221,7 +227,8 @@
   "status": "Pre-election",
   "winner": null,
   "called_by": null,
-  "as_of": null
+  "as_of": null,
+  "sb_d": 71.1
  },
  {
   "key": "MI",
@@ -253,7 +260,8 @@
   "status": "Pre-election",
   "winner": null,
   "called_by": null,
-  "as_of": null
+  "as_of": null,
+  "sb_d": 82.8
  },
  {
   "key": "MN",
@@ -285,7 +293,8 @@
   "status": "Pre-election",
   "winner": null,
   "called_by": null,
-  "as_of": null
+  "as_of": null,
+  "sb_d": 93.7
  },
  {
   "key": "MS",
@@ -317,7 +326,8 @@
   "status": "Pre-election",
   "winner": null,
   "called_by": null,
-  "as_of": null
+  "as_of": null,
+  "sb_d": 4.3
  },
  {
   "key": "NE",
@@ -349,7 +359,8 @@
   "status": "Pre-election",
   "winner": null,
   "called_by": null,
-  "as_of": null
+  "as_of": null,
+  "sb_d": 31.5
  },
  {
   "key": "NH",
@@ -381,7 +392,8 @@
   "status": "Pre-election",
   "winner": null,
   "called_by": null,
-  "as_of": null
+  "as_of": null,
+  "sb_d": 93.5
  },
  {
   "key": "NC",
@@ -413,7 +425,8 @@
   "status": "Pre-election",
   "winner": null,
   "called_by": null,
-  "as_of": null
+  "as_of": null,
+  "sb_d": 96.3
  },
  {
   "key": "OH-S",
@@ -445,7 +458,8 @@
   "status": "Pre-election",
   "winner": null,
   "called_by": null,
-  "as_of": null
+  "as_of": null,
+  "sb_d": 71.2
  },
  {
   "key": "SC",
@@ -477,7 +491,8 @@
   "status": "Pre-election",
   "winner": null,
   "called_by": null,
-  "as_of": null
+  "as_of": null,
+  "sb_d": 32.7
  },
  {
   "key": "TX",
@@ -509,6 +524,7 @@
   "status": "Pre-election",
   "winner": null,
   "called_by": null,
-  "as_of": null
+  "as_of": null,
+  "sb_d": 73.8
  }
 ]

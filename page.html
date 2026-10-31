@@ -132,6 +132,11 @@
 .tx-flips .d b { color: var(--tx-d); } .tx-flips .r b { color: var(--tx-r); }
 .tx-page > .tx-sec + .tx-sec { border-top: 1px solid var(--color-border-line); padding-top: var(--cds-pad-lg); }
 .tx-tbl td.nm { white-space: nowrap; }
+.tx-seatbar .sd, .tx-legend .sw.sd { background: #2F6BDB; } .tx-seatbar .kd, .tx-legend .sw.kd { background: #6E9BE8; } .tx-seatbar .nd, .tx-legend .sw.nd { background: #AFC7F2; }
+.tx-seatbar .tu, .tx-legend .sw.tu { background: #9AA0B4; }
+.tx-seatbar .nr, .tx-legend .sw.nr { background: #F3B8B1; } .tx-seatbar .kr, .tx-legend .sw.kr { background: #E8867B; } .tx-seatbar .sr, .tx-legend .sw.sr { background: #D63E31; }
+.tx-seatbar { height: 1.4rem; }
+.tx-seatbar .mid { width: 3px; background: #FFFFFF; box-shadow: 0 0 0 1px #0A0F24; z-index: 1; }
 .tx-tbl td.r { white-space: nowrap; }
 .tx-tools button, .tx-tools input[type=search] { background: rgba(18, 26, 58, 0.6); color: var(--tx-ink); }
 .tx-tools button[aria-pressed="true"] { background: #E8ECFF; color: #0A0F24; border-color: #E8ECFF; }
@@ -144,8 +149,8 @@
   </div>
   <nav class="tx-tabs" role="tablist" aria-label="Tracker pages">
     <button id="tab-senate" role="tab" aria-selected="true">U.S. Senate</button>
-    <button id="tab-governor" role="tab" aria-selected="false">Governors</button>
     <button id="tab-house" role="tab" aria-selected="false">U.S. House</button>
+    <button id="tab-governor" role="tab" aria-selected="false">Governors</button>
   </nav>
 
   <div class="tx-page" id="page-senate" role="tabpanel">
@@ -166,6 +171,31 @@
     </section>
   </div>
 
+  <div class="tx-page" id="page-house" role="tabpanel" hidden>
+    <section class="tx-sec">
+      <h2>House control</h2>
+      <div class="tx-control" id="house-control" data-source="ctl_house"></div>
+      <div class="tx-flips" id="house-flips" data-source="house"></div>
+    </section>
+    <section class="tx-sec">
+      <h2>Battleground districts</h2>
+      <p>Cook Toss Up and Lean seats. The 32 Likely seats count toward the bar and are listed in the results table.</p>
+      <div class="tx-tools"><span class="tx-meta">Order</span><button id="house-o-rating" aria-pressed="true">Closest rating first</button><button id="house-o-close" aria-pressed="false">Poll closing time</button></div>
+      <div class="tx-board" id="house-board" data-source="house"></div>
+    </section>
+    <section class="tx-sec">
+      <h2>Results</h2>
+      <div class="tx-tools">
+        <input type="search" id="house-q" placeholder="Search district or candidate" aria-label="Search districts">
+        <button id="house-f-tu" aria-pressed="false">Toss Ups only</button>
+        <button id="house-f-gop" aria-pressed="false">GOP-held</button>
+        <button id="house-f-lk" aria-pressed="false">Add Likely seats</button>
+        <span id="house-count" class="tx-meta"></span>
+      </div>
+      <div class="tx-card tx-scroll"><table class="tx-tbl" id="house-table" data-source="house" data-row-key="key"><thead></thead><tbody></tbody></table></div>
+      <ul class="tx-notes" id="house-notes" data-source="house"></ul>
+    </section>
+  </div>
   <div class="tx-page" id="page-governor" role="tabpanel" hidden>
     <section class="tx-sec">
       <h2>Governorships</h2>
@@ -184,46 +214,22 @@
     </section>
   </div>
 
-  <div class="tx-page" id="page-house" role="tabpanel" hidden>
-    <section class="tx-sec">
-      <h2>House control</h2>
-      <div class="tx-control" id="house-control" data-source="ctl_house"></div>
-      <div class="tx-flips" id="house-flips" data-source="house"></div>
-    </section>
-    <section class="tx-sec">
-      <h2>Battleground districts</h2>
-      <div class="tx-tools"><span class="tx-meta">Order</span><button id="house-o-rating" aria-pressed="true">Closest rating first</button><button id="house-o-close" aria-pressed="false">Poll closing time</button></div>
-      <div class="tx-board" id="house-board" data-source="house"></div>
-    </section>
-    <section class="tx-sec">
-      <h2>Results</h2>
-      <div class="tx-tools">
-        <input type="search" id="house-q" placeholder="Search district or candidate" aria-label="Search districts">
-        <button id="house-f-tu" aria-pressed="false">Toss Ups only</button>
-        <button id="house-f-gop" aria-pressed="false">GOP-held</button>
-        <span id="house-count" class="tx-meta"></span>
-      </div>
-      <div class="tx-card tx-scroll"><table class="tx-tbl" id="house-table" data-source="house" data-row-key="key"><thead></thead><tbody></tbody></table></div>
-      <ul class="tx-notes" id="house-notes" data-source="house"></ul>
-    </section>
-  </div>
 </div>
 
 <script>
-// Seat count: base = seats not on the ballot plus seats on the ballot we do not track (counted for the party favored by Cook);
-// tracked races count as won when called, otherwise as leading for whoever is ahead.
+// Seat count: safe = seats not on the ballot plus Solid seats we do not track. Tracked races sit in their Cook rating
+// bucket until called, then move to the winner's side; leads in uncalled races are counted separately.
 const usControl = (rows, c) => {
-  const s = { total: c.total, majority: c.majority, kind: c.chamber, d_base: (c.not_up_d || 0) + (c.untracked_d || 0), r_base: (c.not_up_r || 0) + (c.untracked_r || 0),
-    d_won: 0, r_won: 0, d_lead: 0, r_lead: 0, pending: 0, note: c.note || '' };
+  const s = { total: c.total, majority: c.majority, kind: c.chamber, d_safe: (c.not_up_d || 0) + (c.untracked_d || 0), r_safe: (c.not_up_r || 0) + (c.untracked_r || 0),
+    d_won: 0, r_won: 0, d_lead: 0, r_lead: 0, likely_d: 0, lean_d: 0, toss: 0, lean_r: 0, likely_r: 0, note: c.note || '', sb_control_d: c.sb_control_d, sb_mean_d: c.sb_mean_d };
+  const B = { 'Solid D': 'd_safe', 'Likely D': 'likely_d', 'Lean D': 'lean_d', 'Toss Up': 'toss', 'Lean R': 'lean_r', 'Likely R': 'likely_r', 'Solid R': 'r_safe' };
   for (const x of rows) {
-    const side = x.status === 'Called' ? x.winner : (x.status === 'Pre-election' ? null : x.leader);
-    if (x.status === 'Called' && side === 'D') s.d_won++;
-    else if (x.status === 'Called' && side === 'R') s.r_won++;
-    else if (side === 'D') s.d_lead++;
-    else if (side === 'R') s.r_lead++;
-    else s.pending++;
+    if (x.status === 'Called' && (x.winner === 'D' || x.winner === 'R')) { s[x.winner === 'D' ? 'd_won' : 'r_won']++; continue; }
+    s[B[x.rating] || 'toss']++;
+    if (x.status !== 'Pre-election' && x.leader === 'D') s.d_lead++;
+    if (x.status !== 'Pre-election' && x.leader === 'R') s.r_lead++;
   }
-  s.d_proj = s.d_base + s.d_won + s.d_lead; s.r_proj = s.r_base + s.r_won + s.r_lead;
+  s.d_count = s.d_safe + s.d_won; s.r_count = s.r_safe + s.r_won;
   return [s];
 };
 for (const k of ['senate', 'governor', 'house']) {
@@ -259,17 +265,18 @@ for (const k of ['senate', 'governor', 'house']) {
   const mini = (r) => { const b = el('div', 'tx-mini'); const d = el('span', 'dv'); d.style.width = (Number(r.dem_pct) || 0) + '%'; const g = el('span', 'rv'); g.style.width = (Number(r.rep_pct) || 0) + '%'; b.append(d, g); return b; };
   const presTxt = (m) => (m == null || m === '' ? '' : (Number(m) < 0 ? 'Trump +' : 'Harris +') + Math.abs(Number(m)).toFixed(1));
   const label = (r) => r.label || r.key;
+  const sbTxt = (r) => (r.sb_d == null ? '' : Number(r.sb_d) >= 50 ? (r.dem_party === 'I' ? 'I ' : 'D ') + Math.round(Number(r.sb_d)) + '%' : 'R ' + Math.round(100 - Number(r.sb_d)) + '%');
   const tile = (r) => {
     const t = el('div', 'tx-t'); const s = state(r); if (s.startsWith('won')) t.classList.add(s);
     const r1 = el('div', 'row1'); const nm = el('span', 'd', label(r)); const f = flip(r); if (f) nm.append(el('span', 'tx-flip ' + f.toLowerCase(), 'FLIP'));
     r1.append(nm, el('span', 'st ' + s, shortStatus(r)));
     const names = el('div', 'names'); names.append(el('span', winCls(r, 'D'), dName(r)), el('span', winCls(r, 'R'), r.rep ? last(r.rep) : (r.rep_label || '(no R)')));
     const nums = el('div', 'nums'); nums.append(el('span', 'dv', pct(r.dem_pct)), el('span', 'rv', pct(r.rep_pct)));
-    const sub = [r.rating, r.open ? 'Open, ' + (r.held_by || '') + ' held' : (r.incumbent ? 'Inc. ' + last(r.incumbent) : '')].filter(Boolean).join(' · ');
+    const sub = [r.rating, sbTxt(r) ? 'Silver ' + sbTxt(r) : null, r.open ? 'Open, ' + (r.held_by || '') + ' held' : (r.incumbent ? 'Inc. ' + last(r.incumbent) : '')].filter(Boolean).join(' · ');
     t.append(r1, names, nums, mini(r), el('div', 'sub', r.status === 'Pre-election' || !r.status ? sub : (r.margin != null ? sgn(r.margin) + ' · ' + (r.rating || '') : sub)));
     return t;
   };
-  const COLS = (k) => [['Race', '', 'label'], ['Rating', '', 'rating'], ['Democrat', '', 'dem'], ['Republican', '', 'rep'], ['Dem', 'r', 'dem_pct'], ['Rep', 'r', 'rep_pct'], ['Margin', 'r', 'margin'], ['Counted', 'r', 'reporting'], ['Status', '', 'status'], ['Polls close (ET)', 'wide', 'polls_close_et'], ['2024 pres.', 'r wide', 'pres24_margin'], k === 'house' ? ['Incumbent', 'wide', 'incumbent'] : ['Last time', 'wide', 'last_result']];
+  const COLS = (k) => [['Race', '', 'label'], ['Rating', '', 'rating'], ['Silver', 'r', 'sb_d'], ['Democrat', '', 'dem'], ['Republican', '', 'rep'], ['Dem', 'r', 'dem_pct'], ['Rep', 'r', 'rep_pct'], ['Margin', 'r', 'margin'], ['Counted', 'r', 'reporting'], ['Status', '', 'status'], ['Polls close (ET)', 'wide', 'polls_close_et'], ['2024 pres.', 'r wide', 'pres24_margin'], k === 'house' ? ['Incumbent', 'wide', 'incumbent'] : ['Last time', 'wide', 'last_result']];
   const head = (tbl, k) => { if (tbl.tHead.rows.length) return; const tr = el('tr'); for (const [h, c, f] of COLS(k)) { const th = el('th', c || null, h); th.dataset.field = f; tr.append(th); } tbl.tHead.replaceChildren(tr); };
   const row = (r, k) => {
     const tr = el('tr'); tr.id = 'row-' + r.key; tr.dataset.key = r.key;
@@ -277,7 +284,7 @@ for (const k of ['senate', 'governor', 'house']) {
     const rt = el('td'); rt.append(el('span', 'tx-rt ' + rtCls(r.rating), r.rating || '—'));
     const st = el('td'); st.append(el('span', 'tx-pill ' + state(r), r.status === 'Called' ? 'Called' + (r.called_by ? ' (' + r.called_by + ')' : '') : (r.status || 'Pre-election')));
     const lastCell = k === 'house' ? (r.open ? 'Open (' + (r.held_by || '?') + ')' : (r.incumbent || '—') + (r.held_by ? ' (' + r.held_by + ')' : '')) : (r.last_result || '—');
-    tr.append(race, rt, el('td', ['nm', winCls(r, 'D')].filter(Boolean).join(' '), dName(r, true)), el('td', ['nm', winCls(r, 'R')].filter(Boolean).join(' '), r.rep || r.rep_label || '—'),
+    tr.append(race, rt, el('td', 'r', sbTxt(r) || '—'), el('td', ['nm', winCls(r, 'D')].filter(Boolean).join(' '), dName(r, true)), el('td', ['nm', winCls(r, 'R')].filter(Boolean).join(' '), r.rep || r.rep_label || '—'),
       el('td', 'r dv', pct(r.dem_pct)), el('td', 'r rv', pct(r.rep_pct)), el('td', 'r', sgn(r.margin)),
       el('td', 'r', r.reporting == null || r.reporting === '' ? '—' : Number(r.reporting).toFixed(0) + '%'), st,
       el('td', 'wide', r.polls_close_et || '—'), el('td', 'r wide', presTxt(r.pres24_margin) || '—'), el('td', 'wide muted', lastCell));
@@ -285,21 +292,23 @@ for (const k of ['senate', 'governor', 'house']) {
   };
   const control = (box, c, k) => {
     box.replaceChildren(); if (!c || !c.total) return;
-    const t = c.total;
+    const t = c.total; const gov = k === 'governor';
     const nums = el('div', 'nums');
-    const dBox = el('div'); dBox.append(el('div', 'big d', String(c.d_proj)), el('div', 'lbl', k === 'governor' ? 'Democratic governors, won or leading' : 'Democrats, won or leading'));
-    const mid = el('div', 'lbl', k === 'governor' ? 'of ' + t + ' governorships' : c.majority + ' of ' + t + ' for a majority' + (c.note ? ' (' + c.note + ')' : ''));
-    const rBox = el('div'); rBox.style.textAlign = 'right'; rBox.append(el('div', 'big r', String(c.r_proj)), el('div', 'lbl', k === 'governor' ? 'Republican governors, won or leading' : 'Republicans, won or leading'));
+    const dBox = el('div'); dBox.append(el('div', 'big d', String(c.d_count)), el('div', 'lbl', (gov ? 'Democratic governors' : 'Democrats') + ': safe or called' + (c.d_lead ? ', leading in ' + c.d_lead + ' more' : '')));
+    const mid = el('div', 'lbl', gov ? 'of ' + t + ' governorships' : c.majority + ' of ' + t + ' for a majority' + (c.note ? ' (' + c.note + ')' : ''));
+    mid.style.textAlign = 'center';
+    if (c.sb_control_d != null) mid.append(el('br'), document.createTextNode('Silver Bulletin: Democrats ' + Math.round(c.sb_control_d) + '% to win control' + (c.sb_mean_d ? ', ' + Math.round(c.sb_mean_d) + ' seats on average' : '')));
+    const rBox = el('div'); rBox.style.textAlign = 'right'; rBox.append(el('div', 'big r', String(c.r_count)), el('div', 'lbl', (gov ? 'Republican governors' : 'Republicans') + ': safe or called' + (c.r_lead ? ', leading in ' + c.r_lead + ' more' : '')));
     nums.append(dBox, mid, rBox);
-    const bar = el('div', 'tx-seatbar'); bar.setAttribute('role', 'img'); bar.setAttribute('aria-label', 'Democrats ' + c.d_proj + ', Republicans ' + c.r_proj + ' of ' + t);
-    const seg = (cls, n) => { const s = el('span', cls); s.style.width = (n / t) * 100 + '%'; return s; };
-    bar.append(seg('dw', c.d_base + c.d_won), seg('dl', c.d_lead), seg('rl', c.r_lead), seg('rw', c.r_base + c.r_won));
-    if (k !== 'governor') { const m = el('span', 'mid'); m.style.left = (c.majority / t) * 100 + '%'; bar.append(m); }
+    const bar = el('div', 'tx-seatbar'); bar.setAttribute('role', 'img');
+    bar.setAttribute('aria-label', 'Democrats ' + c.d_count + ' safe or called, ' + c.likely_d + ' likely, ' + c.lean_d + ' lean; ' + c.toss + ' toss ups; Republicans ' + c.lean_r + ' lean, ' + c.likely_r + ' likely, ' + c.r_count + ' safe or called, of ' + t);
+    const SEG = [['sd', c.d_count], ['kd', c.likely_d], ['nd', c.lean_d], ['tu', c.toss], ['nr', c.lean_r], ['kr', c.likely_r], ['sr', c.r_count]];
+    for (const [cls, n] of SEG) { const sp = el('span', cls); sp.style.width = (n / t) * 100 + '%'; bar.append(sp); }
+    if (!gov) { const m = el('span', 'mid'); m.style.left = (c.majority / t) * 100 + '%'; bar.append(m); }
     const lg = el('div', 'tx-legend');
-    const item = (color, txt) => { const s = el('span'); const i = el('i'); i.style.background = color; s.append(i, document.createTextNode(txt)); return s; };
-    const baseTxt = k === 'house' ? 'safe or likely' : 'not up or safe';
-    lg.append(item('var(--tx-d)', 'D ' + c.d_base + ' ' + baseTxt + ', ' + c.d_won + ' won'), item('#3F6DB5', 'D leading ' + c.d_lead),
-      item('#A84A44', 'R leading ' + c.r_lead), item('var(--tx-r)', 'R ' + c.r_base + ' ' + baseTxt + ', ' + c.r_won + ' won'), el('span', null, c.pending + ' key races not yet reporting'));
+    const item = (cls, txt) => { const sp = el('span'); const i = el('i', 'sw ' + cls); sp.append(i, document.createTextNode(txt)); return sp; };
+    lg.append(item('sd', 'D safe or called ' + c.d_count), item('kd', 'Likely D ' + c.likely_d), item('nd', 'Lean D ' + c.lean_d), item('tu', 'Toss Up ' + c.toss),
+      item('nr', 'Lean R ' + c.lean_r), item('kr', 'Likely R ' + c.likely_r), item('sr', 'R safe or called ' + c.r_count));
     box.append(nums, bar, lg);
   };
   const flips = (box, rows) => {
@@ -309,7 +318,7 @@ for (const k of ['senate', 'governor', 'house']) {
   };
   const notes = (box, rows) => { box.replaceChildren(...rows.filter((r) => r.rules).map((r) => { const li = el('li'); li.append(el('b', null, label(r) + ': '), document.createTextNode(r.rules)); return li; })); };
 
-  const KEYS = ['senate', 'governor', 'house'];
+  const KEYS = ['senate', 'house', 'governor'];
   const pages = {}, tabs = {}, order = {};
   for (const k of KEYS) {
     pages[k] = document.getElementById('page-' + k); tabs[k] = document.getElementById('tab-' + k); order[k] = 'rating';
@@ -318,9 +327,9 @@ for (const k of ['senate', 'governor', 'house']) {
   }
   let current = 'senate';
   const show = (name) => { current = name; for (const k of KEYS) { pages[k].hidden = k !== name; tabs[k].setAttribute('aria-selected', String(k === name)); } dash.setLink(name); draw(); };
-  const filt = { q: '', tu: false, gop: false };
+  const filt = { q: '', tu: false, gop: false, lk: false };
   const q = document.getElementById('house-q'); q.addEventListener('input', () => { filt.q = q.value.trim().toLowerCase(); draw(); });
-  for (const f of ['tu', 'gop']) { const b = document.getElementById('house-f-' + f); b.addEventListener('click', () => { filt[f] = !filt[f]; b.setAttribute('aria-pressed', String(filt[f])); draw(); }); }
+  for (const f of ['tu', 'gop', 'lk']) { const b = document.getElementById('house-f-' + f); b.addEventListener('click', () => { filt[f] = !filt[f]; b.setAttribute('aria-pressed', String(filt[f])); draw(); }); }
 
   const sorters = {
     rating: (a, b) => (RANK[a.rating] ?? 4) - (RANK[b.rating] ?? 4) || closeMin(a.polls_close_et) - closeMin(b.polls_close_et) || String(a.key).localeCompare(String(b.key)),
@@ -339,10 +348,10 @@ for (const k of ['senate', 'governor', 'house']) {
     if (d.status !== 'ok') { board.replaceChildren(el('div', 'tx-empty', d.status === 'error' ? 'Failed to load' : 'Loading')); return; }
     const rows = d.data.slice().sort(sorters[order[k]]);
     flips(document.getElementById(k + '-flips'), rows);
-    board.replaceChildren(...rows.map(tile));
+    board.replaceChildren(...rows.filter((r) => r.tier !== 'likely').map(tile));
     let trows = d.data.slice().sort(sorters.rating);
     if (k === 'house') {
-      trows = trows.filter((r) => (!filt.tu || r.rating === 'Toss Up') && (!filt.gop || r.held_by === 'R') && (!filt.q || [r.key, r.dem, r.rep, r.incumbent].join(' ').toLowerCase().includes(filt.q)));
+      trows = trows.filter((r) => (filt.lk || r.tier !== 'likely') && (!filt.tu || r.rating === 'Toss Up') && (!filt.gop || r.held_by === 'R') && (!filt.q || [r.key, r.dem, r.rep, r.incumbent].join(' ').toLowerCase().includes(filt.q)));
       document.getElementById('house-count').textContent = trows.length + ' of ' + rows.length + ' districts';
     }
     tbl.tBodies[0].replaceChildren(...trows.map((r) => row(r, k)));
