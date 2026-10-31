@@ -1,0 +1,30 @@
+[
+ {
+  "chamber": "senate",
+  "total": 100,
+  "majority": 51,
+  "note": "Vance breaks a 50-50 tie",
+  "not_up_d": 34,
+  "not_up_r": 31,
+  "untracked_d": 9,
+  "untracked_r": 10
+ },
+ {
+  "chamber": "governor",
+  "total": 50,
+  "majority": 26,
+  "not_up_d": 6,
+  "not_up_r": 8,
+  "untracked_d": 13,
+  "untracked_r": 7
+ },
+ {
+  "chamber": "house",
+  "total": 435,
+  "majority": 218,
+  "untracked_d": 204,
+  "untracked_r": 178,
+  "not_up_d": 0,
+  "not_up_r": 0
+ }
+]
