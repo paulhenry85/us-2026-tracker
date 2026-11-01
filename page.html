@@ -151,6 +151,43 @@
 .tx-tbl td.r { white-space: nowrap; }
 .tx-tools button, .tx-tools input[type=search] { background: rgba(18, 26, 58, 0.6); color: var(--tx-ink); }
 .tx-tools button[aria-pressed="true"] { background: #E8ECFF; color: #0A0F24; border-color: #E8ECFF; }
+
+/* Aurora borealis theme */
+.tx { --tx-page: #050B18; --tx-accent: #7CF5C4; --tx-surface: rgba(10, 22, 40, 0.72); --color-panel: rgba(10, 22, 40, 0.72); --color-border-line: rgba(124, 245, 196, 0.16);
+  position: relative; isolation: isolate; overflow: hidden;
+  background-color: #050B18;
+  background-image:
+    radial-gradient(1px 1px at 8% 12%, rgba(255,255,255,.9) 50%, transparent 52%),
+    radial-gradient(1px 1px at 63% 6%, rgba(255,255,255,.75) 50%, transparent 52%),
+    radial-gradient(1.5px 1.5px at 88% 30%, rgba(230,255,245,.9) 50%, transparent 52%),
+    radial-gradient(1px 1px at 33% 58%, rgba(255,255,255,.6) 50%, transparent 52%),
+    radial-gradient(1px 1px at 94% 74%, rgba(214,240,255,.75) 50%, transparent 52%),
+    radial-gradient(1.5px 1.5px at 19% 86%, rgba(255,255,255,.8) 50%, transparent 52%),
+    radial-gradient(1px 1px at 51% 37%, rgba(255,255,255,.55) 50%, transparent 52%),
+    linear-gradient(180deg, #03070F 0%, #061428 45%, #071A2A 75%, #050B18 100%);
+  background-size: 190px 190px, 250px 250px, 320px 320px, 210px 210px, 280px 280px, 350px 350px, 160px 160px, 100% 100%; }
+.tx::before, .tx::after { content: ""; position: absolute; z-index: -1; pointer-events: none; left: -20%; right: -20%; filter: blur(38px); opacity: 1; }
+.tx::before { top: -12rem; height: 34rem;
+  background:
+    radial-gradient(ellipse 38% 55% at 22% 55%, rgba(60, 255, 170, .6), transparent 70%),
+    radial-gradient(ellipse 30% 45% at 48% 40%, rgba(40, 230, 200, .48), transparent 70%),
+    radial-gradient(ellipse 34% 50% at 74% 58%, rgba(150, 90, 255, .45), transparent 70%),
+    radial-gradient(ellipse 24% 38% at 92% 35%, rgba(255, 90, 180, .18), transparent 70%);
+  transform: skewY(-6deg); animation: tx-aurora 26s ease-in-out infinite alternate; }
+.tx::after { top: 6rem; height: 26rem;
+  background:
+    radial-gradient(ellipse 42% 40% at 30% 50%, rgba(80, 255, 190, .16), transparent 70%),
+    radial-gradient(ellipse 36% 36% at 70% 45%, rgba(120, 120, 255, .16), transparent 70%);
+  transform: skewY(4deg); animation: tx-aurora 34s ease-in-out infinite alternate-reverse; }
+@keyframes tx-aurora { 0% { transform: translateX(-4%) skewY(-6deg) scaleY(1); } 50% { transform: translateX(3%) skewY(-3deg) scaleY(1.12); } 100% { transform: translateX(6%) skewY(-7deg) scaleY(.94); } }
+@media (prefers-reduced-motion: reduce) { .tx::before, .tx::after { animation: none; } }
+.tx-head h1 span { color: #7CF5C4; text-shadow: 0 0 14px rgba(124, 245, 196, .55), 0 0 30px rgba(150, 90, 255, .35); }
+.tx-tabs button[aria-selected="true"] { border-bottom-color: #7CF5C4; }
+.tx-tabs button:focus-visible, .tx-tools input:focus-visible, .tx-tools button:focus-visible { outline-color: #7CF5C4; }
+.tx-tbl th { background: #0A1A2E; }
+.tx-control, .tx-t, .tx-card, .tx-bwc { box-shadow: 0 0 0 1px rgba(124,245,196,.04), 0 8px 28px rgba(0, 0, 0, .4); backdrop-filter: blur(3px); }
+.tx-rt.tu { color: #7CF5C4; border-color: #7CF5C4; }
+.tx-tools button[aria-pressed="true"] { background: #7CF5C4; color: #04111C; border-color: #7CF5C4; }
 </style>
 
 <div class="tx">

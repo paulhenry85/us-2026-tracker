@@ -24,7 +24,7 @@ HEAD = """<!doctype html>
   --cds-font-size-caption: 12px; --cds-font-size-body: 14px; --cds-font-size-heading: 18px; --cds-font-size-title: 24px;
 }
 [hidden] { display: none !important; }
-html, body { margin: 0; background: #0A0F24; color: #E8ECFF; font-family: var(--font-anthropic-sans); }
+html, body { margin: 0; background: #050B18; color: #E8ECFF; font-family: var(--font-anthropic-sans); }
 #dash-root { max-width: 1280px; margin: 0 auto; padding: 16px; box-sizing: border-box; }
 .site-updated { max-width: 1280px; margin: 0 auto; padding: 8px 16px 24px; font-size: 12px; color: #9AA6C8; box-sizing: border-box; }
 </style>
