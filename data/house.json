@@ -201,6 +201,9 @@
   "called_by": null,
   "as_of": null,
   "tier": "battleground",
+  "bw": true,
+  "bw_about": "Open Republican seat (Andy Barr is running for U.S. Senate). The first competitive House race to report in the country.",
+  "h22_margin": -29.1,
   "sb_d": 53.0
  },
  {
@@ -1883,8 +1886,8 @@
   "rep": "Barb Regnitz",
   "others": null,
   "polls_close_et": "7:00 PM",
-  "pres24_margin": null,
-  "h24_margin": null,
+  "pres24_margin": 0.4,
+  "h24_margin": 8.5,
   "last_result": null,
   "rules": null,
   "official_results_url": null,
@@ -1901,7 +1904,10 @@
   "status": "Pre-election",
   "winner": null,
   "called_by": null,
-  "as_of": null
+  "as_of": null,
+  "bw": true,
+  "bw_about": "Democratic-held Gary and Hammond seat Republicans are targeting. Lake, Porter and LaPorte counties are on Central time.",
+  "h22_margin": 5.6
  },
  {
   "key": "MI-08",

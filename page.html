@@ -132,6 +132,17 @@
 .tx-flips .d b { color: var(--tx-d); } .tx-flips .r b { color: var(--tx-r); }
 .tx-page > .tx-sec + .tx-sec { border-top: 1px solid var(--color-border-line); padding-top: var(--cds-pad-lg); }
 .tx-tbl td.nm { white-space: nowrap; }
+.tx-bw { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr)); gap: var(--cds-gap-md); }
+.tx-bwc { background: var(--tx-surface); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-md) var(--cds-pad-lg); display: grid; gap: var(--cds-gap-sm); }
+.tx-bwc .hd { display: flex; justify-content: space-between; align-items: baseline; gap: var(--cds-gap-sm); }
+.tx-bwc .hd b { font-family: var(--font-anthropic-serif); font-weight: 400; font-size: var(--cds-font-size-title); }
+.tx-bwc .ab { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+.tx-bwc .cand { display: flex; justify-content: space-between; gap: var(--cds-gap-sm); font-variant-numeric: tabular-nums; }
+.tx-bwc .cand .dv { color: var(--tx-d); } .tx-bwc .cand .rv { color: var(--tx-r); }
+.tx-bwc table { width: 100%; border-collapse: collapse; font-size: var(--cds-font-size-caption); font-variant-numeric: tabular-nums; }
+.tx-bwc td { padding: 0.2rem 0; border-top: 1px solid var(--color-border-line); }
+.tx-bwc td.r { text-align: right; } .tx-bwc tr.now td { font-weight: 600; font-size: var(--cds-font-size-body); }
+.tx-bwc .shift { font-size: var(--cds-font-size-body); }
 .tx-seatbar .sd, .tx-legend .sw.sd { background: #2F6BDB; } .tx-seatbar .kd, .tx-legend .sw.kd { background: #6E9BE8; } .tx-seatbar .nd, .tx-legend .sw.nd { background: #AFC7F2; }
 .tx-seatbar .tu, .tx-legend .sw.tu { background: #9AA0B4; }
 .tx-seatbar .nr, .tx-legend .sw.nr { background: #F3B8B1; } .tx-seatbar .kr, .tx-legend .sw.kr { background: #E8867B; } .tx-seatbar .sr, .tx-legend .sw.sr { background: #D63E31; }
@@ -172,6 +183,11 @@
   </div>
 
   <div class="tx-page" id="page-house" role="tabpanel" hidden>
+    <section class="tx-sec">
+      <h2>Bellwethers</h2>
+      <p>The first House seats to report. How far each moves from 2024 is an early read on the night.</p>
+      <div class="tx-bw" id="house-bw" data-source="house"></div>
+    </section>
     <section class="tx-sec">
       <h2>House control</h2>
       <div class="tx-control" id="house-control" data-source="ctl_house"></div>
@@ -316,6 +332,19 @@ for (const k of ['senate', 'governor', 'house']) {
     const it = (cls, n, t) => { const s = el('span', cls); s.append(el('b', null, String(n)), document.createTextNode(t)); return s; };
     box.replaceChildren(it('d', d, 'Democratic pickups'), it('r', r, 'Republican pickups'), it('', called, 'of ' + rows.length + ' key races called'));
   };
+  const bwCard = (r) => {
+    const c = el('div', 'tx-bwc'); c.id = 'bw-' + r.key;
+    const hd = el('div', 'hd'); hd.append(el('b', null, r.key), el('span', 'st ' + state(r), shortStatus(r))); c.append(hd, el('div', 'ab', r.bw_about || ''));
+    const cand = el('div', 'cand'); cand.append(el('span', ['dv', winCls(r, 'D')].filter(Boolean).join(' '), dName(r, true) + ' ' + pct(r.dem_pct)), el('span', ['rv', winCls(r, 'R')].filter(Boolean).join(' '), pct(r.rep_pct) + ' ' + (r.rep || '')));
+    c.append(cand, mini(r));
+    const tb = el('table'); const tr = (lbl, v, cls) => { const x = el('tr', cls || null); x.append(el('td', null, lbl), el('td', 'r', v)); tb.append(x); };
+    tr('2026 now', r.margin == null ? '—' : sgn(r.margin), 'now'); tr('2024 House', sgn(r.h24_margin)); tr('2022 House', sgn(r.h22_margin)); tr('2024 President', presTxt(r.pres24_margin) || '—');
+    c.append(tb);
+    const sh = r.margin != null && r.h24_margin != null ? Number(r.margin) - Number(r.h24_margin) : null;
+    c.append(el('div', 'shift', 'Shift from 2024 House: ' + (sh == null ? '—' : (sh > 0 ? 'D+' : sh < 0 ? 'R+' : '') + Math.abs(sh).toFixed(1))));
+    if (r.sb_d != null) c.append(el('div', 'ab', 'Silver Bulletin: ' + sbTxt(r) + ' · Cook: ' + (r.rating || '—')));
+    return c;
+  };
   const notes = (box, rows) => { box.replaceChildren(...rows.filter((r) => r.rules).map((r) => { const li = el('li'); li.append(el('b', null, label(r) + ': '), document.createTextNode(r.rules)); return li; })); };
 
   const KEYS = ['senate', 'house', 'governor'];
@@ -356,6 +385,7 @@ for (const k of ['senate', 'governor', 'house']) {
     }
     tbl.tBodies[0].replaceChildren(...trows.map((r) => row(r, k)));
     notes(document.getElementById(k + '-notes'), rows);
+    if (k === 'house') document.getElementById('house-bw').replaceChildren(...rows.filter((r) => r.bw).sort((a, b) => (a.key === 'KY-06' ? -1 : 1)).map(bwCard));
   };
   const h = (location.hash || '').slice(1); if (KEYS.includes(h)) show(h);
   dash.onData(draw);
