@@ -325,11 +325,13 @@ for (const k of ['senate', 'governor', 'house']) {
     r1.append(nm, el('span', 'st ' + s, shortStatus(r)));
     const names = el('div', 'names'); names.append(el('span', winCls(r, 'D'), dName(r)), el('span', winCls(r, 'R'), r.rep ? last(r.rep) : (r.rep_label || '(no R)')));
     const nums = el('div', 'nums'); nums.append(el('span', 'dv', pct(r.dem_pct)), el('span', 'rv', pct(r.rep_pct)));
-    const sub = [r.rating, sbTxt(r) ? 'Silver ' + sbTxt(r) : null, r.open ? 'Open, ' + (r.held_by || '') + ' held' : (r.incumbent ? 'Inc. ' + last(r.incumbent) : '')].filter(Boolean).join(' · ');
-    t.append(r1, names, nums, mini(r), el('div', 'sub', r.status === 'Pre-election' || !r.status ? sub : (r.margin != null ? sgn(r.margin) + ' · ' + (r.rating || '') : sub)));
+    const sil = sbTxt(r) ? 'Silver ' + sbTxt(r) : 'Silver —'; const cook = 'Cook ' + (r.rating || '—');
+    const who = r.open ? 'Open, ' + (r.held_by || '') + ' held' : (r.incumbent ? 'Inc. ' + last(r.incumbent) : '');
+    const live = r.status && r.status !== 'Pre-election' && r.margin != null;
+    t.append(r1, names, nums, mini(r), el('div', 'sub', live ? sgn(r.margin) + ' · ' + sil : sil), el('div', 'sub', cook), el('div', 'sub', who));
     return t;
   };
-  const COLS = (k) => [['Race', '', 'label'], ['Rating', '', 'rating'], ['Silver', 'r', 'sb_d'], ['Democrat', '', 'dem'], ['Republican', '', 'rep'], ['Dem', 'r', 'dem_pct'], ['Rep', 'r', 'rep_pct'], ['Margin', 'r', 'margin'], ['Counted', 'r', 'reporting'], ['Status', '', 'status'], ['Polls close (ET)', 'wide', 'polls_close_et'], ['2024 pres.', 'r wide', 'pres24_margin'], k === 'house' ? ['Incumbent', 'wide', 'incumbent'] : ['Last time', 'wide', 'last_result']];
+  const COLS = (k) => [['Race', '', 'label'], ['Silver', 'r', 'sb_d'], ['Cook', '', 'rating'], ['Democrat', '', 'dem'], ['Republican', '', 'rep'], ['Dem', 'r', 'dem_pct'], ['Rep', 'r', 'rep_pct'], ['Margin', 'r', 'margin'], ['Counted', 'r', 'reporting'], ['Status', '', 'status'], ['Polls close (ET)', 'wide', 'polls_close_et'], ['2024 pres.', 'r wide', 'pres24_margin'], k === 'house' ? ['Incumbent', 'wide', 'incumbent'] : ['Last time', 'wide', 'last_result']];
   const head = (tbl, k) => { if (tbl.tHead.rows.length) return; const tr = el('tr'); for (const [h, c, f] of COLS(k)) { const th = el('th', c || null, h); th.dataset.field = f; tr.append(th); } tbl.tHead.replaceChildren(tr); };
   const row = (r, k) => {
     const tr = el('tr'); tr.id = 'row-' + r.key; tr.dataset.key = r.key;
@@ -337,7 +339,7 @@ for (const k of ['senate', 'governor', 'house']) {
     const rt = el('td'); rt.append(el('span', 'tx-rt ' + rtCls(r.rating), r.rating || '—'));
     const st = el('td'); st.append(el('span', 'tx-pill ' + state(r), r.status === 'Called' ? 'Called' + (r.called_by ? ' (' + r.called_by + ')' : '') : (r.status || 'Pre-election')));
     const lastCell = k === 'house' ? (r.open ? 'Open (' + (r.held_by || '?') + ')' : (r.incumbent || '—') + (r.held_by ? ' (' + r.held_by + ')' : '')) : (r.last_result || '—');
-    tr.append(race, rt, el('td', 'r', sbTxt(r) || '—'), el('td', ['nm', winCls(r, 'D')].filter(Boolean).join(' '), dName(r, true)), el('td', ['nm', winCls(r, 'R')].filter(Boolean).join(' '), r.rep || r.rep_label || '—'),
+    tr.append(race, el('td', 'r', sbTxt(r) || '—'), rt, el('td', ['nm', winCls(r, 'D')].filter(Boolean).join(' '), dName(r, true)), el('td', ['nm', winCls(r, 'R')].filter(Boolean).join(' '), r.rep || r.rep_label || '—'),
       el('td', 'r dv', pct(r.dem_pct)), el('td', 'r rv', pct(r.rep_pct)), el('td', 'r', sgn(r.margin)),
       el('td', 'r', r.reporting == null || r.reporting === '' ? '—' : Number(r.reporting).toFixed(0) + '%'), st,
       el('td', 'wide', r.polls_close_et || '—'), el('td', 'r wide', presTxt(r.pres24_margin) || '—'), el('td', 'wide muted', lastCell));
