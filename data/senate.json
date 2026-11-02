@@ -30,7 +30,7 @@
   "winner": null,
   "called_by": null,
   "as_of": null,
-  "sb_d": 56.2
+  "sb_d": 58.3
  },
  {
   "key": "FL-S",
@@ -63,7 +63,7 @@
   "winner": null,
   "called_by": null,
   "as_of": null,
-  "sb_d": 17.2
+  "sb_d": 17.4
  },
  {
   "key": "GA",
@@ -96,7 +96,7 @@
   "winner": null,
   "called_by": null,
   "as_of": null,
-  "sb_d": 98.0
+  "sb_d": 98.3
  },
  {
   "key": "IA",
@@ -162,7 +162,7 @@
   "winner": null,
   "called_by": null,
   "as_of": null,
-  "sb_d": 61.2
+  "sb_d": 64.5
  },
  {
   "key": "LA",
@@ -195,7 +195,7 @@
   "winner": null,
   "called_by": null,
   "as_of": null,
-  "sb_d": 7.6
+  "sb_d": 9.5
  },
  {
   "key": "ME",
@@ -228,7 +228,7 @@
   "winner": null,
   "called_by": null,
   "as_of": null,
-  "sb_d": 71.1
+  "sb_d": 78.2
  },
  {
   "key": "MI",
@@ -261,7 +261,7 @@
   "winner": null,
   "called_by": null,
   "as_of": null,
-  "sb_d": 82.8
+  "sb_d": 86.1
  },
  {
   "key": "MN",
@@ -294,7 +294,7 @@
   "winner": null,
   "called_by": null,
   "as_of": null,
-  "sb_d": 93.7
+  "sb_d": 93.4
  },
  {
   "key": "MS",
@@ -327,7 +327,7 @@
   "winner": null,
   "called_by": null,
   "as_of": null,
-  "sb_d": 4.3
+  "sb_d": 4.4
  },
  {
   "key": "NE",
@@ -360,7 +360,7 @@
   "winner": null,
   "called_by": null,
   "as_of": null,
-  "sb_d": 31.5
+  "sb_d": 33.5
  },
  {
   "key": "NH",
@@ -393,7 +393,7 @@
   "winner": null,
   "called_by": null,
   "as_of": null,
-  "sb_d": 93.5
+  "sb_d": 95.6
  },
  {
   "key": "NC",
@@ -426,7 +426,7 @@
   "winner": null,
   "called_by": null,
   "as_of": null,
-  "sb_d": 96.3
+  "sb_d": 96.8
  },
  {
   "key": "OH-S",
@@ -459,7 +459,7 @@
   "winner": null,
   "called_by": null,
   "as_of": null,
-  "sb_d": 71.2
+  "sb_d": 71.9
  },
  {
   "key": "SC",
@@ -492,7 +492,7 @@
   "winner": null,
   "called_by": null,
   "as_of": null,
-  "sb_d": 32.7
+  "sb_d": 33.2
  },
  {
   "key": "TX",
@@ -525,6 +525,6 @@
   "winner": null,
   "called_by": null,
   "as_of": null,
-  "sb_d": 73.8
+  "sb_d": 77.1
  }
 ]

@@ -31,7 +31,7 @@
   "called_by": null,
   "as_of": null,
   "rep_label": "3 Republicans",
-  "sb_d": 96.5
+  "sb_d": 89.1
  },
  {
   "key": "AZ",
@@ -64,7 +64,7 @@
   "winner": null,
   "called_by": null,
   "as_of": null,
-  "sb_d": 95.3
+  "sb_d": 96.4
  },
  {
   "key": "FL",
@@ -97,7 +97,7 @@
   "winner": null,
   "called_by": null,
   "as_of": null,
-  "sb_d": 22.6
+  "sb_d": 22.9
  },
  {
   "key": "GA",
@@ -130,7 +130,7 @@
   "winner": null,
   "called_by": null,
   "as_of": null,
-  "sb_d": 63.0
+  "sb_d": 63.8
  },
  {
   "key": "IA",
@@ -163,7 +163,7 @@
   "winner": null,
   "called_by": null,
   "as_of": null,
-  "sb_d": 92.5
+  "sb_d": 93.0
  },
  {
   "key": "KS",
@@ -196,7 +196,7 @@
   "winner": null,
   "called_by": null,
   "as_of": null,
-  "sb_d": 33.3
+  "sb_d": 37.9
  },
  {
   "key": "MI",
@@ -229,7 +229,7 @@
   "winner": null,
   "called_by": null,
   "as_of": null,
-  "sb_d": 95.2
+  "sb_d": 96.9
  },
  {
   "key": "NE",
@@ -262,7 +262,7 @@
   "winner": null,
   "called_by": null,
   "as_of": null,
-  "sb_d": 12.3
+  "sb_d": 12.5
  },
  {
   "key": "NV",
@@ -295,7 +295,7 @@
   "winner": null,
   "called_by": null,
   "as_of": null,
-  "sb_d": 49.3
+  "sb_d": 49.9
  },
  {
   "key": "NH",
@@ -328,7 +328,7 @@
   "winner": null,
   "called_by": null,
   "as_of": null,
-  "sb_d": 5.2
+  "sb_d": 8.3
  },
  {
   "key": "OH",
@@ -361,7 +361,7 @@
   "winner": null,
   "called_by": null,
   "as_of": null,
-  "sb_d": 78.9
+  "sb_d": 83.3
  },
  {
   "key": "OK",
@@ -394,7 +394,7 @@
   "winner": null,
   "called_by": null,
   "as_of": null,
-  "sb_d": 7.0
+  "sb_d": 6.9
  },
  {
   "key": "OR",
@@ -427,7 +427,7 @@
   "winner": null,
   "called_by": null,
   "as_of": null,
-  "sb_d": 84.3
+  "sb_d": 84.8
  },
  {
   "key": "TX",
@@ -460,7 +460,7 @@
   "winner": null,
   "called_by": null,
   "as_of": null,
-  "sb_d": 28.7
+  "sb_d": 33.3
  },
  {
   "key": "VT",
@@ -493,7 +493,7 @@
   "winner": null,
   "called_by": null,
   "as_of": null,
-  "sb_d": 27.7
+  "sb_d": 44.3
  },
  {
   "key": "WI",
@@ -526,6 +526,6 @@
   "winner": null,
   "called_by": null,
   "as_of": null,
-  "sb_d": 81.1
+  "sb_d": 81.3
  }
 ]
