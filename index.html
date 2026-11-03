@@ -261,12 +261,12 @@ html, body { margin: 0; background: #050B18; color: #E8ECFF; font-family: var(--
     <span class="tx-meta" id="tx-updated">—</span>
   </div>
   <nav class="tx-tabs" role="tablist" aria-label="Tracker pages">
-    <button id="tab-senate" role="tab" aria-selected="true">U.S. Senate</button>
-    <button id="tab-house" role="tab" aria-selected="false">U.S. House</button>
+    <button id="tab-house" role="tab" aria-selected="true">U.S. House</button>
+    <button id="tab-senate" role="tab" aria-selected="false">U.S. Senate</button>
     <button id="tab-governor" role="tab" aria-selected="false">Governors</button>
   </nav>
 
-  <div class="tx-page" id="page-senate" role="tabpanel">
+  <div class="tx-page" id="page-senate" role="tabpanel" hidden>
     <section class="tx-sec">
       <h2>Senate control</h2>
       <div class="tx-control" id="senate-control" data-source="ctl_senate"></div>
@@ -284,7 +284,7 @@ html, body { margin: 0; background: #050B18; color: #E8ECFF; font-family: var(--
     </section>
   </div>
 
-  <div class="tx-page" id="page-house" role="tabpanel" hidden>
+  <div class="tx-page" id="page-house" role="tabpanel">
     <section class="tx-sec">
       <h2>Bellwethers</h2>
       <p>The first House seats to report, in poll-closing order. Flip: Democrats should win. Coin flip: a Democratic win is a solid night. Hold: Democratic seats on tough maps. Wave: a Democratic win means a wave. Tsunami: a Democratic win is a historic rout.</p>
@@ -474,14 +474,14 @@ for (const k of ['senate', 'governor', 'house']) {
   };
   const notes = (box, rows) => { box.replaceChildren(...rows.filter((r) => r.rules).map((r) => { const li = el('li'); li.append(el('b', null, label(r) + ': '), document.createTextNode(r.rules)); return li; })); };
 
-  const KEYS = ['senate', 'house', 'governor'];
+  const KEYS = ['house', 'senate', 'governor'];
   const pages = {}, tabs = {}, order = {};
   for (const k of KEYS) {
     pages[k] = document.getElementById('page-' + k); tabs[k] = document.getElementById('tab-' + k); order[k] = 'rating';
     tabs[k].addEventListener('click', () => show(k));
     for (const o of ['rating', 'close']) document.getElementById(k + '-o-' + o).addEventListener('click', () => { order[k] = o; for (const p of ['rating', 'close']) document.getElementById(k + '-o-' + p).setAttribute('aria-pressed', String(p === o)); draw(); });
   }
-  let current = 'senate';
+  let current = 'house';
   const show = (name) => { current = name; for (const k of KEYS) { pages[k].hidden = k !== name; tabs[k].setAttribute('aria-selected', String(k === name)); } dash.setLink(name); draw(); };
   const filt = { q: '', tu: false, gop: false, lk: false };
   const q = document.getElementById('house-q'); q.addEventListener('input', () => { filt.q = q.value.trim().toLowerCase(); draw(); });
