@@ -277,7 +277,7 @@
     </section>
     <section class="tx-sec">
       <h2>Battleground districts</h2>
-      <p>Cook Toss Up and Lean seats. The 32 Likely seats count toward the bar and are listed in the results table.</p>
+      <p>Cook Toss Up and Lean seats. The 32 Likely seats count toward the bar and are listed in the results table. 59 reach seats (Republican seats Cook rates Solid where Silver gives Democrats at least about 1%) appear here once the Democrat leads or is within 10 points; use Add reach seats in the table to see all of them.</p>
       <div class="tx-tools"><span class="tx-meta">Order</span><button id="house-o-rating" aria-pressed="true">Closest rating first</button><button id="house-o-close" aria-pressed="false">Poll closing time</button></div>
       <div class="tx-board" id="house-board" data-source="house"></div>
     </section>
@@ -288,6 +288,7 @@
         <button id="house-f-tu" aria-pressed="false">Toss Ups only</button>
         <button id="house-f-gop" aria-pressed="false">GOP-held</button>
         <button id="house-f-lk" aria-pressed="false">Add Likely seats</button>
+        <button id="house-f-rc" aria-pressed="false">Add reach seats</button>
         <span id="house-count" class="tx-meta"></span>
       </div>
       <div class="tx-card tx-scroll"><table class="tx-tbl" id="house-table" data-source="house" data-row-key="key"><thead></thead><tbody></tbody></table></div>
@@ -321,8 +322,10 @@
 const dd = (k) => { const d = dash.data(k); return d && d.status === 'ok' && Array.isArray(d.data) ? Object.assign({}, d, { data: d.data.filter((r) => r.tier !== 'watch') }) : d; };
 const usControl = (rows, c) => {
   rows = rows.filter((r) => r.tier !== 'watch');
+  const extraR = rows.filter((r) => r.tier === 'extra').length;
   const s = { total: c.total, majority: c.majority, kind: c.chamber, d_safe: (c.not_up_d || 0) + (c.untracked_d || 0), r_safe: (c.not_up_r || 0) + (c.untracked_r || 0),
     d_won: 0, r_won: 0, d_lead: 0, r_lead: 0, likely_d: 0, lean_d: 0, toss: 0, lean_r: 0, likely_r: 0, note: c.note || '', sb_control_d: c.sb_control_d, sb_mean_d: c.sb_mean_d };
+  s.r_safe -= extraR;
   const B = { 'Solid D': 'd_safe', 'Likely D': 'likely_d', 'Lean D': 'lean_d', 'Toss Up': 'toss', 'Lean R': 'lean_r', 'Likely R': 'likely_r', 'Solid R': 'r_safe' };
   for (const x of rows) {
     if (x.status === 'Called' && (x.winner === 'D' || x.winner === 'R')) { s[x.winner === 'D' ? 'd_won' : 'r_won']++; continue; }
@@ -471,9 +474,10 @@ for (const k of ['senate', 'governor', 'house']) {
   }
   let current = 'house';
   const show = (name) => { current = name; for (const k of KEYS) { pages[k].hidden = k !== name; tabs[k].setAttribute('aria-selected', String(k === name)); } dash.setLink(name); draw(); };
-  const filt = { q: '', tu: false, gop: false, lk: false };
+  const filt = { q: '', tu: false, gop: false, lk: false, rc: false };
+  const moving = (r) => r.status && r.status !== 'Pre-election' && r.margin != null && r.margin !== '' && (r.leader === 'D' || Number(r.margin) >= -10);
   const q = document.getElementById('house-q'); q.addEventListener('input', () => { filt.q = q.value.trim().toLowerCase(); draw(); });
-  for (const f of ['tu', 'gop', 'lk']) { const b = document.getElementById('house-f-' + f); b.addEventListener('click', () => { filt[f] = !filt[f]; b.setAttribute('aria-pressed', String(filt[f])); draw(); }); }
+  for (const f of ['tu', 'gop', 'lk', 'rc']) { const b = document.getElementById('house-f-' + f); b.addEventListener('click', () => { filt[f] = !filt[f]; b.setAttribute('aria-pressed', String(filt[f])); draw(); }); }
 
   const sorters = {
     rating: (a, b) => (RANK[a.rating] ?? 4) - (RANK[b.rating] ?? 4) || closeMin(a.polls_close_et) - closeMin(b.polls_close_et) || String(a.key).localeCompare(String(b.key)),
@@ -492,10 +496,10 @@ for (const k of ['senate', 'governor', 'house']) {
     if (d.status !== 'ok') { board.replaceChildren(el('div', 'tx-empty', d.status === 'error' ? 'Failed to load' : 'Loading')); return; }
     const rows = d.data.slice().sort(sorters[order[k]]);
     flips(document.getElementById(k + '-flips'), rows);
-    board.replaceChildren(...rows.filter((r) => r.tier !== 'likely').map(tile));
+    board.replaceChildren(...rows.filter((r) => r.tier !== 'likely' && (r.tier !== 'extra' || moving(r))).map(tile));
     let trows = d.data.slice().sort(sorters.rating);
     if (k === 'house') {
-      trows = trows.filter((r) => (filt.lk || r.tier !== 'likely') && (!filt.tu || r.rating === 'Toss Up') && (!filt.gop || r.held_by === 'R') && (!filt.q || [r.key, r.dem, r.rep, r.incumbent].join(' ').toLowerCase().includes(filt.q)));
+      trows = trows.filter((r) => (filt.lk || r.tier !== 'likely') && (filt.rc || r.tier !== 'extra' || moving(r)) && (!filt.tu || r.rating === 'Toss Up') && (!filt.gop || r.held_by === 'R') && (!filt.q || [r.key, r.dem, r.rep, r.incumbent].join(' ').toLowerCase().includes(filt.q)));
       document.getElementById('house-count').textContent = trows.length + ' of ' + rows.length + ' districts';
     }
     tbl.tBodies[0].replaceChildren(...trows.map((r) => row(r, k)));
