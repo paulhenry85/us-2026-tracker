@@ -272,7 +272,10 @@
 <script>
 // Seat count: safe = seats not on the ballot plus Solid seats we do not track. Tracked races sit in their Cook rating
 // bucket until called, then move to the winner's side; leads in uncalled races are counted separately.
+// Rows with tier 'watch' are shared with other trackers and never shown or counted here.
+const dd = (k) => { const d = dash.data(k); return d && d.status === 'ok' && Array.isArray(d.data) ? Object.assign({}, d, { data: d.data.filter((r) => r.tier !== 'watch') }) : d; };
 const usControl = (rows, c) => {
+  rows = rows.filter((r) => r.tier !== 'watch');
   const s = { total: c.total, majority: c.majority, kind: c.chamber, d_safe: (c.not_up_d || 0) + (c.untracked_d || 0), r_safe: (c.not_up_r || 0) + (c.untracked_r || 0),
     d_won: 0, r_won: 0, d_lead: 0, r_lead: 0, likely_d: 0, lean_d: 0, toss: 0, lean_r: 0, likely_r: 0, note: c.note || '', sb_control_d: c.sb_control_d, sb_mean_d: c.sb_mean_d };
   const B = { 'Solid D': 'd_safe', 'Likely D': 'likely_d', 'Lean D': 'lean_d', 'Toss Up': 'toss', 'Lean R': 'lean_r', 'Likely R': 'likely_r', 'Solid R': 'r_safe' };
@@ -406,10 +409,10 @@ for (const k of ['senate', 'governor', 'house']) {
   const draw = () => {
     let newest = null;
     for (const k of KEYS) {
-      const d = dash.data(k); if (d.status === 'ok') for (const r of d.data) if (r.as_of && (!newest || r.as_of > newest)) newest = r.as_of;
+      const d = dd(k); if (d.status === 'ok') for (const r of d.data) if (r.as_of && (!newest || r.as_of > newest)) newest = r.as_of;
     }
     document.getElementById('tx-updated').textContent = newest ? 'Updated ' + new Date(newest).toLocaleString('en-US', { timeZone: 'America/New_York', weekday: 'short', month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' }) + ' ET' : 'First polls close 6:00 PM ET on Tuesday, 3 November';
-    const k = current; const d = dash.data(k);
+    const k = current; const d = dd(k);
     const board = document.getElementById(k + '-board'), tbl = document.getElementById(k + '-table');
     head(tbl, k);
     control(document.getElementById(k + '-control'), (dash.data('ctl_' + k).data || [])[0], k);
