@@ -230,6 +230,21 @@ html, body { margin: 0; background: #050B18; color: #E8ECFF; font-family: var(--
 .bwx .swing .v { font-size: 1.35rem; font-weight: 700; }
 .bwx .about { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); line-height: 1.4; }
 .bwx .foot { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); border-top: 1px solid var(--color-border-line); padding-top: 0.45rem; }
+/* Legibility over the aurora: denser card backing, brighter party colors, shadowed numbers */
+.tx .tx-bwc, .tx .tx-t, .tx .tx-control, .tx .tx-card { background: rgba(6, 14, 28, 0.9); }
+.tx { --tx-d: #8DBBFF; --tx-r: #FF8A7E; }
+.tx .bwx .pc, .tx .bwx .stat .v, .tx .bwx .swing .v, .tx .bwx .top .st, .tx .bwx .top b, .tx .tx-t .nums span, .tx .tx-t .row1, .tx .tx-control .big, .tx .tx-tbl td.r, .tx .tx-flips b {
+  text-shadow: 0 0 2px rgba(0, 0, 0, 0.95), 0 1px 4px rgba(0, 0, 0, 0.9), 0 0 10px rgba(0, 0, 0, 0.6); }
+.tx .bwx .pc { -webkit-text-stroke: 0.6px rgba(0, 0, 0, 0.55); paint-order: stroke fill; font-weight: 700; }
+.tx .bwx .stat { background: rgba(0, 0, 0, 0.35); }
+.tx .bwx .stat .v { font-size: 1.1rem; font-weight: 700; }
+.tx .bwx .swing { background: rgba(0, 0, 0, 0.45); }
+.bwx .pc, .bwx .stat .v, .bwx .swing .v, .tx-t .nums span, .tx-tbl td.dv, .tx-tbl td.rv, .tx-control .big, .tx-flips b, .bwx .top .st {
+  text-shadow: 0 0 1px rgba(0,0,0,.95), 0 1px 2px rgba(0,0,0,.9), 0 0 10px rgba(0,0,0,.65); }
+.bwx .pc.d, .bwx .v.d, .tx-t .nums .dv, .tx-tbl td.dv, .tx-control .big.d { color: #B4D2FF; }
+.bwx .pc.rp, .bwx .v.r, .tx-t .nums .rv, .tx-tbl td.rv, .tx-control .big.r { color: #FFAEA5; }
+.bwx .pc { font-weight: 700; } .bwx .stat .v { font-weight: 700; font-size: 1.05rem; }
+.bwx .stat { background: rgba(0,0,0,.25); } .bwx .swing { background: rgba(0,0,0,.3); }
 .tx-tier { display: inline-block; font-size: var(--cds-font-size-caption); font-weight: 600; letter-spacing: 0.02em; padding: 0.05rem 0.45rem; margin-right: 0.45rem; border: 1px solid var(--color-border-line); border-radius: 999px; vertical-align: middle; color: var(--color-fg-muted); }
 .tx-bwc .shift { font-size: var(--cds-font-size-body); }
 .tx-seatbar .sd, .tx-legend .sw.sd { background: #2F6BDB; } .tx-seatbar .kd, .tx-legend .sw.kd { background: #6E9BE8; } .tx-seatbar .nd, .tx-legend .sw.nd { background: #AFC7F2; }
