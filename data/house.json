@@ -31,7 +31,8 @@
   "called_by": null,
   "as_of": null,
   "tier": "battleground",
-  "sb_d": 96.6
+  "sb_d": 96.6,
+  "bw": false
  },
  {
   "key": "CO-05",
@@ -65,7 +66,8 @@
   "called_by": null,
   "as_of": null,
   "tier": "battleground",
-  "sb_d": 46.2
+  "sb_d": 46.2,
+  "bw": false
  },
  {
   "key": "FL-14",
@@ -99,7 +101,8 @@
   "called_by": null,
   "as_of": null,
   "tier": "battleground",
-  "sb_d": 83.9
+  "sb_d": 83.9,
+  "bw": false
  },
  {
   "key": "FL-22",
@@ -133,7 +136,8 @@
   "called_by": null,
   "as_of": null,
   "tier": "battleground",
-  "sb_d": 71.1
+  "sb_d": 71.1,
+  "bw": false
  },
  {
   "key": "IA-02",
@@ -167,7 +171,8 @@
   "called_by": null,
   "as_of": null,
   "tier": "battleground",
-  "sb_d": 71.6
+  "sb_d": 71.6,
+  "bw": false
  },
  {
   "key": "KY-06",
@@ -202,9 +207,11 @@
   "as_of": null,
   "tier": "battleground",
   "bw": true,
-  "bw_about": "Open Republican seat (Andy Barr is running for U.S. Senate). The first competitive House race to report in the country.",
+  "bw_about": "Open Republican seat (Andy Barr is running for Senate), Trump +15. A Democratic win means a wave is on; a Republican win by under 10 still means Democrats are overperforming.",
   "h22_margin": -29.1,
-  "sb_d": 54.4
+  "sb_d": 54.4,
+  "bw_tier": "Wave",
+  "bw_order": 1
  },
  {
   "key": "MI-04",
@@ -238,7 +245,8 @@
   "called_by": null,
   "as_of": null,
   "tier": "battleground",
-  "sb_d": 67.9
+  "sb_d": 67.9,
+  "bw": false
  },
  {
   "key": "MI-07",
@@ -272,7 +280,8 @@
   "called_by": null,
   "as_of": null,
   "tier": "battleground",
-  "sb_d": 86.1
+  "sb_d": 86.1,
+  "bw": false
  },
  {
   "key": "MI-10",
@@ -306,7 +315,8 @@
   "called_by": null,
   "as_of": null,
   "tier": "battleground",
-  "sb_d": 68.1
+  "sb_d": 68.1,
+  "bw": false
  },
  {
   "key": "MT-01",
@@ -340,7 +350,8 @@
   "called_by": null,
   "as_of": null,
   "tier": "battleground",
-  "sb_d": 63.5
+  "sb_d": 63.5,
+  "bw": false
  },
  {
   "key": "NC-01",
@@ -376,7 +387,9 @@
   "tier": "battleground",
   "sb_d": 88.8,
   "bw": true,
-  "bw_about": "Democratic-held Toss Up (Don Davis) on a redrawn, more Republican map. Polls close at 7:30 PM ET; the first big test of whether Democrats hold their own seats."
+  "bw_about": "Democratic-held (Don Davis) on a map redrawn to oust him. A Davis hold means Democrats are beating the new maps; a loss is the expected result.",
+  "bw_tier": "Hold",
+  "bw_order": 7
  },
  {
   "key": "NY-17",
@@ -410,7 +423,8 @@
   "called_by": null,
   "as_of": null,
   "tier": "battleground",
-  "sb_d": 88.8
+  "sb_d": 88.8,
+  "bw": false
  },
  {
   "key": "OH-07",
@@ -444,7 +458,8 @@
   "called_by": null,
   "as_of": null,
   "tier": "battleground",
-  "sb_d": 81.0
+  "sb_d": 81.0,
+  "bw": false
  },
  {
   "key": "PA-01",
@@ -478,7 +493,11 @@
   "called_by": null,
   "as_of": null,
   "tier": "battleground",
-  "sb_d": 73.5
+  "sb_d": 73.5,
+  "bw": true,
+  "bw_tier": "Wave",
+  "bw_order": 11,
+  "bw_about": "Republican-held (Brian Fitzpatrick) in a seat Harris won. A Harvie win means a wave; Fitzpatrick by under 3 is still a strong Democratic night."
  },
  {
   "key": "SC-01",
@@ -512,7 +531,8 @@
   "called_by": null,
   "as_of": null,
   "tier": "battleground",
-  "sb_d": 28.6
+  "sb_d": 28.6,
+  "bw": false
  },
  {
   "key": "TX-15",
@@ -546,7 +566,8 @@
   "called_by": null,
   "as_of": null,
   "tier": "battleground",
-  "sb_d": 64.5
+  "sb_d": 64.5,
+  "bw": false
  },
  {
   "key": "TX-35",
@@ -580,7 +601,8 @@
   "called_by": null,
   "as_of": null,
   "tier": "battleground",
-  "sb_d": 53.7
+  "sb_d": 53.7,
+  "bw": false
  },
  {
   "key": "VA-01",
@@ -616,7 +638,9 @@
   "tier": "battleground",
   "sb_d": 60.6,
   "bw": true,
-  "bw_about": "Republican-held Toss Up (Rob Wittman), Trump +4.9. Also a 7:00 PM ET Virginia close; a Democratic win here means the House is likely flipping."
+  "bw_about": "Republican-held since 2007, Trump +5. A Taylor win is a solid Democratic night; a Wittman hold is a normal year.",
+  "bw_tier": "Coin flip",
+  "bw_order": 3
  },
  {
   "key": "AZ-01",
@@ -650,7 +674,8 @@
   "called_by": null,
   "as_of": null,
   "tier": "battleground",
-  "sb_d": 84.2
+  "sb_d": 84.2,
+  "bw": false
  },
  {
   "key": "AZ-06",
@@ -684,7 +709,8 @@
   "called_by": null,
   "as_of": null,
   "tier": "battleground",
-  "sb_d": 84.1
+  "sb_d": 84.1,
+  "bw": false
  },
  {
   "key": "CA-48",
@@ -718,7 +744,8 @@
   "called_by": null,
   "as_of": null,
   "tier": "battleground",
-  "sb_d": 95.8
+  "sb_d": 95.8,
+  "bw": false
  },
  {
   "key": "CO-08",
@@ -752,7 +779,8 @@
   "called_by": null,
   "as_of": null,
   "tier": "battleground",
-  "sb_d": 88.5
+  "sb_d": 88.5,
+  "bw": false
  },
  {
   "key": "FL-25",
@@ -786,7 +814,8 @@
   "called_by": null,
   "as_of": null,
   "tier": "battleground",
-  "sb_d": 77.3
+  "sb_d": 77.3,
+  "bw": false
  },
  {
   "key": "IA-01",
@@ -820,7 +849,8 @@
   "called_by": null,
   "as_of": null,
   "tier": "battleground",
-  "sb_d": 81.2
+  "sb_d": 81.2,
+  "bw": false
  },
  {
   "key": "IA-03",
@@ -854,7 +884,8 @@
   "called_by": null,
   "as_of": null,
   "tier": "battleground",
-  "sb_d": 89.4
+  "sb_d": 89.4,
+  "bw": false
  },
  {
   "key": "NC-11",
@@ -888,7 +919,8 @@
   "called_by": null,
   "as_of": null,
   "tier": "battleground",
-  "sb_d": 86.2
+  "sb_d": 86.2,
+  "bw": false
  },
  {
   "key": "NJ-07",
@@ -922,7 +954,8 @@
   "called_by": null,
   "as_of": null,
   "tier": "battleground",
-  "sb_d": 88.4
+  "sb_d": 88.4,
+  "bw": false
  },
  {
   "key": "NM-02",
@@ -956,7 +989,8 @@
   "called_by": null,
   "as_of": null,
   "tier": "battleground",
-  "sb_d": 92.7
+  "sb_d": 92.7,
+  "bw": false
  },
  {
   "key": "OH-09",
@@ -990,7 +1024,11 @@
   "called_by": null,
   "as_of": null,
   "tier": "battleground",
-  "sb_d": 65.8
+  "sb_d": 65.8,
+  "bw": true,
+  "bw_tier": "Hold",
+  "bw_order": 8,
+  "bw_about": "Democratic-held (Marcy Kaptur) on redder lines. A Kaptur hold beats the map again; a loss is the expected result."
  },
  {
   "key": "PA-07",
@@ -1024,7 +1062,11 @@
   "called_by": null,
   "as_of": null,
   "tier": "battleground",
-  "sb_d": 86.6
+  "sb_d": 86.6,
+  "bw": true,
+  "bw_tier": "Flip",
+  "bw_order": 9,
+  "bw_about": "Republican-held Lehigh Valley seat (Ryan Mackenzie), flipped in 2024. Democrats should win it; a Mackenzie hold is a warning sign in Pennsylvania."
  },
  {
   "key": "PA-08",
@@ -1058,7 +1100,8 @@
   "called_by": null,
   "as_of": null,
   "tier": "battleground",
-  "sb_d": 85.8
+  "sb_d": 85.8,
+  "bw": false
  },
  {
   "key": "PA-10",
@@ -1092,7 +1135,11 @@
   "called_by": null,
   "as_of": null,
   "tier": "battleground",
-  "sb_d": 78.8
+  "sb_d": 78.8,
+  "bw": true,
+  "bw_tier": "Flip",
+  "bw_order": 10,
+  "bw_about": "Republican-held (Scott Perry), who won by about 5,000 votes in 2024. Democrats should win it; a Perry hold means they are falling short."
  },
  {
   "key": "TX-34",
@@ -1126,7 +1173,8 @@
   "called_by": null,
   "as_of": null,
   "tier": "battleground",
-  "sb_d": 82.1
+  "sb_d": 82.1,
+  "bw": false
  },
  {
   "key": "VA-02",
@@ -1162,7 +1210,9 @@
   "tier": "battleground",
   "sb_d": 87.1,
   "bw": true,
-  "bw_about": "Republican-held Virginia Beach seat (Jen Kiggans), Trump +0.2. Polls close at 7:00 PM ET and Virginia counts quickly: if Luria is not clearly ahead here, there is no wave."
+  "bw_about": "Republican-held Virginia Beach rematch, Trump +0.2. Democrats should win it; a Kiggans hold means they are falling short of their polls.",
+  "bw_tier": "Flip",
+  "bw_order": 2
  },
  {
   "key": "WA-03",
@@ -1196,7 +1246,8 @@
   "called_by": null,
   "as_of": null,
   "tier": "battleground",
-  "sb_d": 79.9
+  "sb_d": 79.9,
+  "bw": false
  },
  {
   "key": "WI-03",
@@ -1230,7 +1281,8 @@
   "called_by": null,
   "as_of": null,
   "tier": "battleground",
-  "sb_d": 78.6
+  "sb_d": 78.6,
+  "bw": false
  },
  {
   "key": "AK-AL",
@@ -1264,7 +1316,8 @@
   "called_by": null,
   "as_of": null,
   "tier": "battleground",
-  "sb_d": 25.0
+  "sb_d": 25.0,
+  "bw": false
  },
  {
   "key": "AL-02",
@@ -1298,7 +1351,8 @@
   "called_by": null,
   "as_of": null,
   "tier": "battleground",
-  "sb_d": 29.8
+  "sb_d": 29.8,
+  "bw": false
  },
  {
   "key": "AZ-02",
@@ -1332,7 +1386,8 @@
   "called_by": null,
   "as_of": null,
   "tier": "battleground",
-  "sb_d": 29.8
+  "sb_d": 29.8,
+  "bw": false
  },
  {
   "key": "CO-04",
@@ -1366,7 +1421,8 @@
   "called_by": null,
   "as_of": null,
   "tier": "battleground",
-  "sb_d": 24.1
+  "sb_d": 24.1,
+  "bw": false
  },
  {
   "key": "FL-07",
@@ -1400,7 +1456,8 @@
   "called_by": null,
   "as_of": null,
   "tier": "battleground",
-  "sb_d": 34.0
+  "sb_d": 34.0,
+  "bw": false
  },
  {
   "key": "FL-09",
@@ -1434,7 +1491,8 @@
   "called_by": null,
   "as_of": null,
   "tier": "battleground",
-  "sb_d": 40.0
+  "sb_d": 40.0,
+  "bw": false
  },
  {
   "key": "FL-13",
@@ -1468,7 +1526,8 @@
   "called_by": null,
   "as_of": null,
   "tier": "battleground",
-  "sb_d": 34.4
+  "sb_d": 34.4,
+  "bw": false
  },
  {
   "key": "FL-27",
@@ -1504,7 +1563,9 @@
   "tier": "battleground",
   "sb_d": 26.3,
   "bw": true,
-  "bw_about": "Republican-held Miami-Dade seat (María Elvira Salazar). Florida posts most early and mail votes right after 7:00 PM ET; the first test of whether Hispanic voters who moved right in 2024 are coming back."
+  "bw_about": "Republican-held Miami seat, Trump +15: the Latino-vote test. A Rodriguez win means Latino voters swung back; Salazar by 10 or more means the 2024 shift held.",
+  "bw_tier": "Wave",
+  "bw_order": 6
  },
  {
   "key": "IN-05",
@@ -1540,7 +1601,9 @@
   "tier": "battleground",
   "sb_d": 17.8,
   "bw": true,
-  "bw_about": "Republican-held suburban Indianapolis seat (Victoria Spartz). Polls close at 6:00 PM ET, so it reports alongside KY-06 as one of the first competitive House reads of the night."
+  "bw_about": "Republican-held suburban Indianapolis seat (Victoria Spartz), Trump +16.8, reporting at 6:00 PM ET alongside KY-06.",
+  "bw_tier": "Wave",
+  "bw_order": 1.5
  },
  {
   "key": "ME-02",
@@ -1574,7 +1637,11 @@
   "called_by": null,
   "as_of": null,
   "tier": "battleground",
-  "sb_d": 42.0
+  "sb_d": 42.0,
+  "bw": true,
+  "bw_tier": "Hold",
+  "bw_order": 12,
+  "bw_about": "Open Democratic seat, Trump +9. A Dunlap hold is a strong Democratic sign; a LePage win is the expected result."
  },
  {
   "key": "MN-01",
@@ -1608,7 +1675,8 @@
   "called_by": null,
   "as_of": null,
   "tier": "battleground",
-  "sb_d": 41.8
+  "sb_d": 41.8,
+  "bw": false
  },
  {
   "key": "NV-02",
@@ -1642,7 +1710,8 @@
   "called_by": null,
   "as_of": null,
   "tier": "battleground",
-  "sb_d": 33.5
+  "sb_d": 33.5,
+  "bw": false
  },
  {
   "key": "NY-21",
@@ -1676,7 +1745,8 @@
   "called_by": null,
   "as_of": null,
   "tier": "battleground",
-  "sb_d": 26.3
+  "sb_d": 26.3,
+  "bw": false
  },
  {
   "key": "OH-10",
@@ -1710,7 +1780,8 @@
   "called_by": null,
   "as_of": null,
   "tier": "battleground",
-  "sb_d": 26.5
+  "sb_d": 26.5,
+  "bw": false
  },
  {
   "key": "OH-15",
@@ -1744,7 +1815,8 @@
   "called_by": null,
   "as_of": null,
   "tier": "battleground",
-  "sb_d": 39.3
+  "sb_d": 39.3,
+  "bw": false
  },
  {
   "key": "TX-23",
@@ -1778,7 +1850,8 @@
   "called_by": null,
   "as_of": null,
   "tier": "battleground",
-  "sb_d": 45.8
+  "sb_d": 45.8,
+  "bw": false
  },
  {
   "key": "WI-01",
@@ -1812,7 +1885,8 @@
   "called_by": null,
   "as_of": null,
   "tier": "battleground",
-  "sb_d": 49.6
+  "sb_d": 49.6,
+  "bw": false
  },
  {
   "key": "CA-13",
@@ -1846,7 +1920,8 @@
   "status": "Pre-election",
   "winner": null,
   "called_by": null,
-  "as_of": null
+  "as_of": null,
+  "bw": false
  },
  {
   "key": "CA-45",
@@ -1880,7 +1955,8 @@
   "status": "Pre-election",
   "winner": null,
   "called_by": null,
-  "as_of": null
+  "as_of": null,
+  "bw": false
  },
  {
   "key": "IN-01",
@@ -1916,8 +1992,10 @@
   "called_by": null,
   "as_of": null,
   "bw": true,
-  "bw_about": "Democratic-held Gary and Hammond seat Republicans are targeting. Lake, Porter and LaPorte counties are on Central time.",
-  "h22_margin": 5.6
+  "bw_about": "Democratic-held (Frank Mrvan) in a seat Harris won narrowly. Lake County is on Central time, so it reports from 7:00 PM ET.",
+  "h22_margin": 5.6,
+  "bw_tier": "Hold",
+  "bw_order": 6.5
  },
  {
   "key": "MI-08",
@@ -1951,7 +2029,8 @@
   "status": "Pre-election",
   "winner": null,
   "called_by": null,
-  "as_of": null
+  "as_of": null,
+  "bw": false
  },
  {
   "key": "MN-02",
@@ -1985,7 +2064,8 @@
   "status": "Pre-election",
   "winner": null,
   "called_by": null,
-  "as_of": null
+  "as_of": null,
+  "bw": false
  },
  {
   "key": "NE-02",
@@ -2019,7 +2099,8 @@
   "status": "Pre-election",
   "winner": null,
   "called_by": null,
-  "as_of": null
+  "as_of": null,
+  "bw": false
  },
  {
   "key": "NH-01",
@@ -2053,7 +2134,8 @@
   "status": "Pre-election",
   "winner": null,
   "called_by": null,
-  "as_of": null
+  "as_of": null,
+  "bw": false
  },
  {
   "key": "NJ-09",
@@ -2087,7 +2169,8 @@
   "status": "Pre-election",
   "winner": null,
   "called_by": null,
-  "as_of": null
+  "as_of": null,
+  "bw": false
  },
  {
   "key": "NV-01",
@@ -2121,7 +2204,8 @@
   "status": "Pre-election",
   "winner": null,
   "called_by": null,
-  "as_of": null
+  "as_of": null,
+  "bw": false
  },
  {
   "key": "NV-03",
@@ -2155,7 +2239,8 @@
   "status": "Pre-election",
   "winner": null,
   "called_by": null,
-  "as_of": null
+  "as_of": null,
+  "bw": false
  },
  {
   "key": "NV-04",
@@ -2189,7 +2274,8 @@
   "status": "Pre-election",
   "winner": null,
   "called_by": null,
-  "as_of": null
+  "as_of": null,
+  "bw": false
  },
  {
   "key": "NY-03",
@@ -2223,7 +2309,8 @@
   "status": "Pre-election",
   "winner": null,
   "called_by": null,
-  "as_of": null
+  "as_of": null,
+  "bw": false
  },
  {
   "key": "NY-04",
@@ -2257,7 +2344,8 @@
   "status": "Pre-election",
   "winner": null,
   "called_by": null,
-  "as_of": null
+  "as_of": null,
+  "bw": false
  },
  {
   "key": "NY-19",
@@ -2291,7 +2379,8 @@
   "status": "Pre-election",
   "winner": null,
   "called_by": null,
-  "as_of": null
+  "as_of": null,
+  "bw": false
  },
  {
   "key": "OH-01",
@@ -2325,7 +2414,8 @@
   "status": "Pre-election",
   "winner": null,
   "called_by": null,
-  "as_of": null
+  "as_of": null,
+  "bw": false
  },
  {
   "key": "OH-13",
@@ -2359,7 +2449,8 @@
   "status": "Pre-election",
   "winner": null,
   "called_by": null,
-  "as_of": null
+  "as_of": null,
+  "bw": false
  },
  {
   "key": "TX-28",
@@ -2393,7 +2484,8 @@
   "status": "Pre-election",
   "winner": null,
   "called_by": null,
-  "as_of": null
+  "as_of": null,
+  "bw": false
  },
  {
   "key": "VA-07",
@@ -2427,7 +2519,8 @@
   "status": "Pre-election",
   "winner": null,
   "called_by": null,
-  "as_of": null
+  "as_of": null,
+  "bw": false
  },
  {
   "key": "AR-02",
@@ -2461,7 +2554,8 @@
   "status": "Pre-election",
   "winner": null,
   "called_by": null,
-  "as_of": null
+  "as_of": null,
+  "bw": false
  },
  {
   "key": "CO-03",
@@ -2495,7 +2589,8 @@
   "status": "Pre-election",
   "winner": null,
   "called_by": null,
-  "as_of": null
+  "as_of": null,
+  "bw": false
  },
  {
   "key": "FL-16",
@@ -2529,7 +2624,8 @@
   "status": "Pre-election",
   "winner": null,
   "called_by": null,
-  "as_of": null
+  "as_of": null,
+  "bw": false
  },
  {
   "key": "KS-02",
@@ -2563,7 +2659,8 @@
   "status": "Pre-election",
   "winner": null,
   "called_by": null,
-  "as_of": null
+  "as_of": null,
+  "bw": false
  },
  {
   "key": "MO-02",
@@ -2597,7 +2694,8 @@
   "status": "Pre-election",
   "winner": null,
   "called_by": null,
-  "as_of": null
+  "as_of": null,
+  "bw": false
  },
  {
   "key": "NC-03",
@@ -2631,7 +2729,8 @@
   "status": "Pre-election",
   "winner": null,
   "called_by": null,
-  "as_of": null
+  "as_of": null,
+  "bw": false
  },
  {
   "key": "NC-05",
@@ -2665,7 +2764,8 @@
   "status": "Pre-election",
   "winner": null,
   "called_by": null,
-  "as_of": null
+  "as_of": null,
+  "bw": false
  },
  {
   "key": "NC-09",
@@ -2699,7 +2799,8 @@
   "status": "Pre-election",
   "winner": null,
   "called_by": null,
-  "as_of": null
+  "as_of": null,
+  "bw": false
  },
  {
   "key": "NC-13",
@@ -2733,7 +2834,8 @@
   "status": "Pre-election",
   "winner": null,
   "called_by": null,
-  "as_of": null
+  "as_of": null,
+  "bw": false
  },
  {
   "key": "NE-01",
@@ -2767,7 +2869,8 @@
   "status": "Pre-election",
   "winner": null,
   "called_by": null,
-  "as_of": null
+  "as_of": null,
+  "bw": false
  },
  {
   "key": "NJ-02",
@@ -2801,7 +2904,8 @@
   "status": "Pre-election",
   "winner": null,
   "called_by": null,
-  "as_of": null
+  "as_of": null,
+  "bw": false
  },
  {
   "key": "TX-09",
@@ -2835,7 +2939,8 @@
   "status": "Pre-election",
   "winner": null,
   "called_by": null,
-  "as_of": null
+  "as_of": null,
+  "bw": false
  },
  {
   "key": "VA-05",
@@ -2869,7 +2974,11 @@
   "status": "Pre-election",
   "winner": null,
   "called_by": null,
-  "as_of": null
+  "as_of": null,
+  "bw": true,
+  "bw_tier": "Tsunami",
+  "bw_order": 4,
+  "bw_about": "Republican-held (John McGuire); last Democratic win was Perriello in 2008. A Perriello win is a tsunami; a single-digit Republican win is still a great Democratic sign."
  },
  {
   "key": "WA-05",
@@ -2903,7 +3012,8 @@
   "status": "Pre-election",
   "winner": null,
   "called_by": null,
-  "as_of": null
+  "as_of": null,
+  "bw": false
  },
  {
   "key": "MN-08",
@@ -3079,5 +3189,43 @@
   "tier": "watch",
   "sb_d": null,
   "bw": false
+ },
+ {
+  "key": "VA-06",
+  "state": "VA",
+  "label": "VA-06",
+  "office": "House",
+  "rating": "Solid R",
+  "held_by": "R",
+  "incumbent": "Ben Cline",
+  "open": false,
+  "dem": "Beth Macy",
+  "dem_party": "D",
+  "rep": "Ben Cline",
+  "others": null,
+  "polls_close_et": "7:00 PM",
+  "pres24_margin": null,
+  "h24_margin": null,
+  "last_result": null,
+  "rules": null,
+  "official_results_url": "https://enr.elections.virginia.gov/results/public/virginia/elections/2026-November-General",
+  "dem_votes": null,
+  "rep_votes": null,
+  "other_votes": null,
+  "dem_pct": null,
+  "rep_pct": null,
+  "margin": null,
+  "reporting": null,
+  "leader": null,
+  "status": "Pre-election",
+  "winner": null,
+  "called_by": null,
+  "as_of": null,
+  "tier": "watch",
+  "sb_d": null,
+  "bw": true,
+  "bw_tier": "Tsunami",
+  "bw_order": 5,
+  "bw_about": "Safe Republican Shenandoah Valley seat (Ben Cline), House R+28 in 2024. A Macy win is a historic rout; Cline under 15 is a huge swing anyway."
  }
 ]
