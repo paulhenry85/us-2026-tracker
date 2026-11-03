@@ -427,7 +427,7 @@ for (const k of ['senate', 'governor', 'house']) {
     }
     tbl.tBodies[0].replaceChildren(...trows.map((r) => row(r, k)));
     notes(document.getElementById(k + '-notes'), rows);
-    if (k === 'house') document.getElementById('house-bw').replaceChildren(...rows.filter((r) => r.bw).sort((a, b) => (a.key === 'KY-06' ? -1 : 1)).map(bwCard));
+    if (k === 'house') document.getElementById('house-bw').replaceChildren(...rows.filter((r) => r.bw).sort((a, b) => closeMin(a.polls_close_et) - closeMin(b.polls_close_et) || (a.key === 'KY-06' ? -1 : b.key === 'KY-06' ? 1 : 0)).map(bwCard));
   };
   const h = (location.hash || '').slice(1); if (KEYS.includes(h)) show(h);
   dash.onData(draw);

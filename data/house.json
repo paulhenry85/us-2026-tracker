@@ -374,7 +374,9 @@
   "called_by": null,
   "as_of": null,
   "tier": "battleground",
-  "sb_d": 88.8
+  "sb_d": 88.8,
+  "bw": true,
+  "bw_about": "Democratic-held Toss Up (Don Davis) on a redrawn, more Republican map. Polls close at 7:30 PM ET; the first big test of whether Democrats hold their own seats."
  },
  {
   "key": "NY-17",
@@ -612,7 +614,9 @@
   "called_by": null,
   "as_of": null,
   "tier": "battleground",
-  "sb_d": 60.6
+  "sb_d": 60.6,
+  "bw": true,
+  "bw_about": "Republican-held Toss Up (Rob Wittman), Trump +4.9. Also a 7:00 PM ET Virginia close; a Democratic win here means the House is likely flipping."
  },
  {
   "key": "AZ-01",
@@ -1156,7 +1160,9 @@
   "called_by": null,
   "as_of": null,
   "tier": "battleground",
-  "sb_d": 87.1
+  "sb_d": 87.1,
+  "bw": true,
+  "bw_about": "Republican-held Virginia Beach seat (Jen Kiggans), Trump +0.2. Polls close at 7:00 PM ET and Virginia counts quickly: if Luria is not clearly ahead here, there is no wave."
  },
  {
   "key": "WA-03",
@@ -1496,7 +1502,9 @@
   "called_by": null,
   "as_of": null,
   "tier": "battleground",
-  "sb_d": 26.3
+  "sb_d": 26.3,
+  "bw": true,
+  "bw_about": "Republican-held Miami-Dade seat (María Elvira Salazar). Florida posts most early and mail votes right after 7:00 PM ET; the first test of whether Hispanic voters who moved right in 2024 are coming back."
  },
  {
   "key": "IN-05",
