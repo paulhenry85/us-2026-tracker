@@ -1530,7 +1530,9 @@
   "called_by": null,
   "as_of": null,
   "tier": "battleground",
-  "sb_d": 17.8
+  "sb_d": 17.8,
+  "bw": true,
+  "bw_about": "Republican-held suburban Indianapolis seat (Victoria Spartz). Polls close at 6:00 PM ET, so it reports alongside KY-06 as one of the first competitive House reads of the night."
  },
  {
   "key": "ME-02",
