@@ -206,6 +206,30 @@ html, body { margin: 0; background: #050B18; color: #E8ECFF; font-family: var(--
 .tx-bwc table { width: 100%; border-collapse: collapse; font-size: var(--cds-font-size-caption); font-variant-numeric: tabular-nums; }
 .tx-bwc td { padding: 0.2rem 0; border-top: 1px solid var(--color-border-line); }
 .tx-bwc td.r { text-align: right; } .tx-bwc tr.now td { font-weight: 600; font-size: var(--cds-font-size-body); }
+.bwx { display: grid; gap: 0.7rem; }
+.bwx .top { display: flex; justify-content: space-between; align-items: center; gap: var(--cds-gap-sm); }
+.bwx .top .ttl { display: flex; align-items: center; gap: 0.5rem; min-width: 0; }
+.bwx .top b { font-family: var(--font-anthropic-serif); font-weight: 400; font-size: var(--cds-font-size-title); line-height: 1; }
+.bwx .top .sub2 { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+.bwx .top .st { font-size: var(--cds-font-size-body); font-weight: 600; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.bwx .res { display: grid; grid-template-columns: 1fr 1fr; gap: 0.2rem 1rem; font-variant-numeric: tabular-nums; }
+.bwx .res .nm { font-size: var(--cds-font-size-body); } .bwx .res .r { text-align: right; }
+.bwx .res .pc { font-size: 2rem; font-weight: 600; line-height: 1.05; }
+.bwx .res .vt { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+.bwx .res .d { color: var(--tx-d); } .bwx .res .rp { color: var(--tx-r); }
+.bwx .res .won::after { content: " \2713"; font-weight: 700; }
+.bwx .tx-mini { height: 0.5rem; }
+.bwx .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.4rem; }
+.bwx .stat { border: 1px solid var(--color-border-line); border-radius: calc(var(--cds-radius) * 0.6); padding: 0.4rem 0.5rem; text-align: center; font-variant-numeric: tabular-nums; }
+.bwx .stat .k { font-size: 0.72rem; letter-spacing: 0.04em; text-transform: uppercase; color: var(--color-fg-muted); }
+.bwx .stat .v { font-size: var(--cds-font-size-body); font-weight: 600; margin-top: 0.1rem; }
+.bwx .stat.now { border-color: currentColor; }
+.bwx .v.d, .bwx .stat.now.d { color: var(--tx-d); } .bwx .v.r, .bwx .stat.now.r { color: var(--tx-r); }
+.bwx .swing { display: flex; justify-content: space-between; align-items: baseline; padding: 0.45rem 0.65rem; border-radius: calc(var(--cds-radius) * 0.6); background: rgba(255,255,255,0.05); font-variant-numeric: tabular-nums; }
+.bwx .swing .k { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+.bwx .swing .v { font-size: 1.35rem; font-weight: 700; }
+.bwx .about { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); line-height: 1.4; }
+.bwx .foot { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); border-top: 1px solid var(--color-border-line); padding-top: 0.45rem; }
 .tx-tier { display: inline-block; font-size: var(--cds-font-size-caption); font-weight: 600; letter-spacing: 0.02em; padding: 0.05rem 0.45rem; margin-right: 0.45rem; border: 1px solid var(--color-border-line); border-radius: 999px; vertical-align: middle; color: var(--color-fg-muted); }
 .tx-bwc .shift { font-size: var(--cds-font-size-body); }
 .tx-seatbar .sd, .tx-legend .sw.sd { background: #2F6BDB; } .tx-seatbar .kd, .tx-legend .sw.kd { background: #6E9BE8; } .tx-seatbar .nd, .tx-legend .sw.nd { background: #AFC7F2; }
@@ -444,33 +468,46 @@ for (const k of ['senate', 'governor', 'house']) {
     const it = (cls, n, t) => { const s = el('span', cls); s.append(el('b', null, String(n)), document.createTextNode(t)); return s; };
     box.replaceChildren(it('d', d, 'Democratic pickups'), it('r', r, 'Republican pickups'), it('', called, 'of ' + rows.length + ' key races called'));
   };
-  const bwCard = (r) => {
-    const c = el('div', 'tx-bwc'); c.id = 'bw-' + r.key;
-    const hd = el('div', 'hd'); const ttl = el('span'); if (r.bw_tier) ttl.append(el('span', 'tx-tier', r.bw_tier)); ttl.append(el('b', null, r.key)); hd.append(ttl, el('span', 'st ' + state(r), shortStatus(r))); c.append(hd, el('div', 'ab', r.bw_about || ''));
-    const cand = el('div', 'cand'); cand.append(el('span', ['dv', winCls(r, 'D')].filter(Boolean).join(' '), dName(r, true) + ' ' + pct(r.dem_pct)), el('span', ['rv', winCls(r, 'R')].filter(Boolean).join(' '), pct(r.rep_pct) + ' ' + (r.rep || '')));
-    c.append(cand, mini(r));
-    const tb = el('table'); const tr = (lbl, v, cls) => { const x = el('tr', cls || null); x.append(el('td', null, lbl), el('td', 'r', v)); tb.append(x); };
-    tr('2026 now', r.margin == null ? '—' : sgn(r.margin), 'now'); tr('2024 House', sgn(r.h24_margin)); tr('2022 House', sgn(r.h22_margin)); tr('2024 President', presTxt(r.pres24_margin) || '—');
-    c.append(tb);
-    const sh = r.margin != null && r.h24_margin != null ? Number(r.margin) - Number(r.h24_margin) : null;
-    c.append(el('div', 'shift', 'Shift from 2024 House: ' + (sh == null ? '—' : (sh > 0 ? 'D+' : sh < 0 ? 'R+' : '') + Math.abs(sh).toFixed(1))));
-    if (r.sb_d != null) c.append(el('div', 'ab', 'Silver Bulletin: ' + sbTxt(r) + ' · Cook: ' + (r.rating || '—')));
+  const mcls = (v) => (v == null || v === '' ? '' : Number(v) > 0 ? 'd' : Number(v) < 0 ? 'r' : '');
+  const card = (o) => {
+    const c = el('div', 'tx-bwc bwx'); c.id = o.id;
+    const top = el('div', 'top'); const ttl = el('div', 'ttl');
+    if (o.tier) ttl.append(el('span', 'tx-tier', o.tier));
+    ttl.append(el('b', null, o.title)); if (o.sub) ttl.append(el('span', 'sub2', o.sub));
+    top.append(ttl, el('span', 'st', o.status)); c.append(top);
+    const r = o.r; const has = r.dem_pct != null && r.dem_pct !== '';
+    const res = el('div', 'res');
+    res.append(el('div', 'nm d' + (o.wD ? ' won' : ''), o.dem), el('div', 'nm rp r' + (o.wR ? ' won' : ''), o.rep));
+    res.append(el('div', 'pc d', has ? pct(r.dem_pct) : '—'), el('div', 'pc rp r', has ? pct(r.rep_pct) : '—'));
+    if (r.dem_votes != null || r.rep_votes != null) res.append(el('div', 'vt', r.dem_votes != null ? num(r.dem_votes) + ' votes' : ''), el('div', 'vt r', r.rep_votes != null ? num(r.rep_votes) + ' votes' : ''));
+    c.append(res, mini(r));
+    const stats = el('div', 'stats');
+    const st = (k, v, cls) => { const b = el('div', 'stat' + (cls ? ' ' + cls : '')); b.append(el('div', 'k', k), el('div', 'v ' + mcls(v), sgn(v))); stats.append(b); };
+    st('Now', has ? r.margin : null, 'now ' + mcls(has ? r.margin : null));
+    for (const [k, v] of o.base) st(k, v);
+    stats.style.gridTemplateColumns = 'repeat(' + (1 + o.base.length) + ', 1fr)';
+    c.append(stats);
+    const sw = el('div', 'swing'); const shv = has && o.swingBase != null ? Number(r.margin) - Number(o.swingBase) : null;
+    sw.append(el('span', 'k', o.swingLabel), el('span', 'v ' + mcls(shv), shv == null ? '—' : sgn(shv)));
+    c.append(sw);
+    if (o.about) c.append(el('div', 'about', o.about));
+    if (o.foot) c.append(el('div', 'foot', o.foot));
     return c;
   };
+  const bwCard = (r) => {
+    const base = [['2024 House', r.h24_margin], ['2024 Pres.', r.pres24_margin]];
+    if (r.h24_margin == null && r.h22_margin != null) base[0] = ['2022 House', r.h22_margin];
+    const sb = r.sb_d != null ? 'Silver ' + sbTxt(r) + ' · ' : '';
+    return card({ id: 'bw-' + r.key, tier: r.bw_tier, title: r.key, status: shortStatus(r), r,
+      dem: dName(r, true), rep: r.rep || r.rep_label || '(no R)', wD: winner(r) === 'D', wR: winner(r) === 'R',
+      base, swingBase: r.h24_margin != null ? r.h24_margin : r.pres24_margin, swingLabel: r.h24_margin != null ? 'Swing from 2024 House' : 'Swing from 2024 President',
+      about: r.bw_about, foot: sb + 'Cook ' + (r.rating || '—') + (r.called_by ? ' · Called by ' + r.called_by : '') });
+  };
   const ctyCard = (r) => {
-    const c = el('div', 'tx-bwc'); c.id = 'cty-' + String(r.key).replace(/[^A-Za-z0-9]+/g, '-');
     const live = r.status && r.status !== 'Pre-election';
-    const st = live ? (r.reporting != null && r.reporting !== '' ? Number(r.reporting).toFixed(0) + '% in' : 'Counting') : (r.polls_close_et ? 'Polls ' + r.polls_close_et.replace(':00', '').replace(' ', '') : '');
-    const hd = el('div', 'hd'); hd.append(el('b', null, r.county + ', ' + r.state), el('span', 'st ' + (live ? 'counting' : ''), st));
-    c.append(hd, el('div', 'ab', (r.contest ? r.contest + '. ' : '') + (r.about || '')));
-    const cand = el('div', 'cand'); cand.append(el('span', 'dv', (r.dem || '(no D)') + ' ' + pct(r.dem_pct)), el('span', 'rv', pct(r.rep_pct) + ' ' + (r.rep || '')));
-    c.append(cand, mini(r));
-    const tb = el('table'); const tr = (lbl, v, cls) => { const x = el('tr', cls || null); x.append(el('td', null, lbl), el('td', 'r', v)); tb.append(x); };
-    tr('2026 now', r.margin == null || r.margin === '' ? '—' : sgn(r.margin), 'now'); tr('2024 President', presTxt(r.p24_margin) || '—');
-    c.append(tb);
-    const sh = r.margin != null && r.margin !== '' && r.p24_margin != null ? Number(r.margin) - Number(r.p24_margin) : null;
-    c.append(el('div', 'shift', 'Shift from 2024 President: ' + (sh == null ? '—' : (sh > 0 ? 'D+' : sh < 0 ? 'R+' : '') + Math.abs(sh).toFixed(1))));
-    return c;
+    const st = live ? (r.status === 'Complete' ? 'Complete' : r.reporting != null && r.reporting !== '' ? Number(r.reporting).toFixed(0) + '% in' : 'Counting') : (r.polls_close_et ? 'Polls ' + r.polls_close_et.replace(':00', '').replace(' ', '') : '');
+    return card({ id: 'cty-' + String(r.key).replace(/[^A-Za-z0-9]+/g, '-'), title: r.county.replace(/ County$/, ''), sub: r.state + ' · ' + (r.contest || ''), status: st, r,
+      dem: r.dem || '(no D)', rep: r.rep || '', base: [['2024 Pres.', r.p24_margin]], swingBase: r.p24_margin, swingLabel: 'Swing from 2024 President', about: r.about });
   };
   const notes = (box, rows) => { box.replaceChildren(...rows.filter((r) => r.rules).map((r) => { const li = el('li'); li.append(el('b', null, label(r) + ': '), document.createTextNode(r.rules)); return li; })); };
 
