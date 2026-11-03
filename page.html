@@ -226,6 +226,11 @@
       <div class="tx-bw" id="house-bw" data-source="house"></div>
     </section>
     <section class="tx-sec">
+      <h2>Bellwether counties</h2>
+      <p>Counties that count early. Each card follows one 2026 race and compares it with how the county voted for president in 2024.</p>
+      <div class="tx-bw" id="house-cty" data-source="counties"></div>
+    </section>
+    <section class="tx-sec">
       <h2>House control</h2>
       <div class="tx-control" id="house-control" data-source="ctl_house"></div>
       <div class="tx-flips" id="house-flips" data-source="house"></div>
@@ -387,6 +392,21 @@ for (const k of ['senate', 'governor', 'house']) {
     if (r.sb_d != null) c.append(el('div', 'ab', 'Silver Bulletin: ' + sbTxt(r) + ' · Cook: ' + (r.rating || '—')));
     return c;
   };
+  const ctyCard = (r) => {
+    const c = el('div', 'tx-bwc'); c.id = 'cty-' + String(r.key).replace(/[^A-Za-z0-9]+/g, '-');
+    const live = r.status && r.status !== 'Pre-election';
+    const st = live ? (r.reporting != null && r.reporting !== '' ? Number(r.reporting).toFixed(0) + '% in' : 'Counting') : (r.polls_close_et ? 'Polls ' + r.polls_close_et.replace(':00', '').replace(' ', '') : '');
+    const hd = el('div', 'hd'); hd.append(el('b', null, r.county + ', ' + r.state), el('span', 'st ' + (live ? 'counting' : ''), st));
+    c.append(hd, el('div', 'ab', (r.contest ? r.contest + '. ' : '') + (r.about || '')));
+    const cand = el('div', 'cand'); cand.append(el('span', 'dv', (r.dem || '(no D)') + ' ' + pct(r.dem_pct)), el('span', 'rv', pct(r.rep_pct) + ' ' + (r.rep || '')));
+    c.append(cand, mini(r));
+    const tb = el('table'); const tr = (lbl, v, cls) => { const x = el('tr', cls || null); x.append(el('td', null, lbl), el('td', 'r', v)); tb.append(x); };
+    tr('2026 now', r.margin == null || r.margin === '' ? '—' : sgn(r.margin), 'now'); tr('2024 President', presTxt(r.p24_margin) || '—');
+    c.append(tb);
+    const sh = r.margin != null && r.margin !== '' && r.p24_margin != null ? Number(r.margin) - Number(r.p24_margin) : null;
+    c.append(el('div', 'shift', 'Shift from 2024 President: ' + (sh == null ? '—' : (sh > 0 ? 'D+' : sh < 0 ? 'R+' : '') + Math.abs(sh).toFixed(1))));
+    return c;
+  };
   const notes = (box, rows) => { box.replaceChildren(...rows.filter((r) => r.rules).map((r) => { const li = el('li'); li.append(el('b', null, label(r) + ': '), document.createTextNode(r.rules)); return li; })); };
 
   const KEYS = ['senate', 'house', 'governor'];
@@ -427,6 +447,7 @@ for (const k of ['senate', 'governor', 'house']) {
     }
     tbl.tBodies[0].replaceChildren(...trows.map((r) => row(r, k)));
     notes(document.getElementById(k + '-notes'), rows);
+    if (k === 'house') { const cd = dash.data('counties'); const box = document.getElementById('house-cty'); if (cd && cd.status === 'ok' && Array.isArray(cd.data)) box.replaceChildren(...cd.data.slice().sort((a, b) => closeMin(a.polls_close_et) - closeMin(b.polls_close_et) || (a.order || 0) - (b.order || 0)).map(ctyCard)); else box.replaceChildren(el('div', 'tx-empty', 'Loading')); }
     if (k === 'house') document.getElementById('house-bw').replaceChildren(...rows.filter((r) => r.bw).sort((a, b) => closeMin(a.polls_close_et) - closeMin(b.polls_close_et) || (a.key === 'KY-06' ? -1 : b.key === 'KY-06' ? 1 : 0)).map(bwCard));
   };
   const h = (location.hash || '').slice(1); if (KEYS.includes(h)) show(h);

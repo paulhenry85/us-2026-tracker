@@ -33,7 +33,7 @@ html, body { margin: 0; background: #050B18; color: #E8ECFF; font-family: var(--
 // Minimal stand-in for the Claude dashboard runtime: the page calls dash.data(id), dash.onData(fn),
 // dash.calc(id, {inputs, fn}) and dash.setLink(name). Data comes from data/<id>.json.
 (function () {
-  const IDS = ['senate', 'governor', 'house', 'chambers'];
+  const IDS = ['senate', 'governor', 'house', 'chambers', 'counties'];
   const store = {}; const calcs = {}; const subs = [];
   IDS.forEach((id) => { store[id] = { status: 'loading', data: [] }; });
   const fire = () => subs.forEach((fn) => { try { fn(); } catch (e) { console.error(e); } });
